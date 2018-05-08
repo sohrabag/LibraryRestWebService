@@ -1,6 +1,6 @@
-package com.example.service;
+package com.example.service.interfaces;
 
-public interface IBookService {
+public interface IBookManagementService {
 	void create();
 	void delete();
 	Object update(int bookId, Object changedBook);

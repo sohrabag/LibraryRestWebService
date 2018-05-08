@@ -1,6 +1,6 @@
 package com.example.domain.interfaces;
 
-public interface IBookCopy {
+public interface IBookCopies {
 	int getPrice();
 	String getISBN();		//ISBN may be different because of different countries
 	String getEdition();

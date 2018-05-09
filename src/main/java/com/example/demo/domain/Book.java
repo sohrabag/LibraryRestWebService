@@ -16,6 +16,7 @@ import com.example.demo.domain.interfaces.IBook;
 
 @Entity
 public class Book implements IBook {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
@@ -29,15 +30,17 @@ public class Book implements IBook {
 	private String country;
 	
 	//relationships are here
-	@ManyToOne
+	@ManyToOne(targetEntity = Loan.class)
 	@JoinColumn(name="loan_fk")
 	private Loan loan;
-	@ManyToOne
+	
+	@ManyToOne(targetEntity = Author.class)
 	@JoinColumn(name="author_fk")
 	private Author author;
-	@ManyToOne
+	
+	@ManyToOne(targetEntity = Publisher.class)
 	@JoinColumn(name="publisher_fk")
-	private int publishe_fk;
+	private Publisher publishe_fk;
 	
 	@Override
 	public String getISBN() {
@@ -91,7 +94,7 @@ public class Book implements IBook {
 
 
 	public Book(int id, String title, String isbn, int price, String publish_date, GenreEnum genre, String shelf,
-			String country, Loan loan, Author author, int publishe_fk) {
+			String country, Loan loan, Author author, Publisher publishe_fk) {
 		super();
 		this.id = id;
 		this.title = title;

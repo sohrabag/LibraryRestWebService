@@ -1,4 +1,4 @@
-package com.example.domain;
+package com.example.demo.domain;
 
 public enum GenreEnum {
 	SCIENCE_FICTION,SATIR,DRAMA,ACTION_AND_ADVENTURE,ROMANCE,MYSTERY,HORROR,SELFHELP

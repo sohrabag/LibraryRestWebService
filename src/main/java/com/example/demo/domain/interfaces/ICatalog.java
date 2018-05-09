@@ -1,6 +1,6 @@
-package com.example.domain.interfaces;
+package com.example.demo.domain.interfaces;
 
-import com.example.domain.Book;
+import com.example.demo.domain.Book;
 
 public interface ICatalog {
 	void newBook();

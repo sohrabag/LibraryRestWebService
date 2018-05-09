@@ -1,4 +1,4 @@
-package com.example.domain.interfaces;
+package com.example.demo.domain.interfaces;
 
 public interface IAuthor {
 	int getId();

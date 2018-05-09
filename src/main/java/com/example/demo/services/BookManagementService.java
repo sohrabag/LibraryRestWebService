@@ -1,6 +1,6 @@
-package com.example.services;
+package com.example.demo.services;
 
-import com.example.service.interfaces.IBookManagementService;
+import com.example.demo.service.interfaces.IBookManagementService;
 
 public class BookManagementService implements IBookManagementService {
 

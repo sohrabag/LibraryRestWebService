@@ -1,8 +1,8 @@
-package com.example.domain.interfaces;
+package com.example.demo.domain.interfaces;
 
 import java.util.List;
 
-import com.example.domain.GenreEnum;
+import com.example.demo.domain.GenreEnum;
 
 public interface IBook {
 	String getISBN();

@@ -1,4 +1,4 @@
-package com.example.service.interfaces;
+package com.example.demo.service.interfaces;
 
 public interface IMemberManagementService {
 

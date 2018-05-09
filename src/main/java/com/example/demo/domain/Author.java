@@ -1,9 +1,13 @@
-package com.example.domain;
+package com.example.demo.domain;
 
-import com.example.domain.interfaces.IAuthor;
+import com.example.demo.domain.interfaces.IAuthor;
 
 public class Author implements IAuthor {
 
+	private int id;
+	private String name;
+	private String dob;
+	
 	@Override
 	public int getId() {
 		// TODO Auto-generated method stub

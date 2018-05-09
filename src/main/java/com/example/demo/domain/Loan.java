@@ -1,29 +1,29 @@
-package com.example.domain;
+package com.example.demo.domain;
 
-import com.example.domain.interfaces.IMember;
+import com.example.demo.domain.interfaces.ILoan;
 
-public class Member implements IMember {
+public class Loan implements ILoan {
 
 	@Override
-	public String getName() {
+	public int getId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String getDateOut() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String getAddress() {
+	public String getDateDue() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String getPhone() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getEmail() {
+	public String getDate_return() {
 		// TODO Auto-generated method stub
 		return null;
 	}

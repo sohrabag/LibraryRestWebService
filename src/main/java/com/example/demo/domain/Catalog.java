@@ -1,9 +1,9 @@
-package com.example.domain;
+package com.example.demo.domain;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.domain.interfaces.ICatalog;
+import com.example.demo.domain.interfaces.ICatalog;
 
 public class Catalog implements ICatalog {
 

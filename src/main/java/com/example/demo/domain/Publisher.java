@@ -1,6 +1,6 @@
-package com.example.domain;
+package com.example.demo.domain;
 
-import com.example.domain.interfaces.IPublisher;
+import com.example.demo.domain.interfaces.IPublisher;
 
 public class Publisher implements IPublisher {
 

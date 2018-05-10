@@ -80,13 +80,13 @@ public class Book implements IBook {
 	}
 
 	@Override
-	public List<Object> getListByAuthor() {
+	public List<Book> getListByAuthor() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Object> getListByTitle() {
+	public List<Book> getListByTitle() {
 		// TODO Auto-generated method stub
 		return null;
 	}

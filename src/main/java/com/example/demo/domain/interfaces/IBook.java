@@ -2,6 +2,7 @@ package com.example.demo.domain.interfaces;
 
 import java.util.List;
 
+import com.example.demo.domain.Book;
 import com.example.demo.domain.GenreEnum;
 
 public interface IBook {
@@ -11,6 +12,6 @@ public interface IBook {
 	String getPositionInLibrary();
 	String getCountry();
 	int getNumberOfCopies();
-	List<Object> getListByAuthor();
-	List<Object> getListByTitle();
+	List<Book> getListByAuthor();
+	List<Book> getListByTitle();
 }

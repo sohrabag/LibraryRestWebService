@@ -3,12 +3,14 @@ package com.example.demo.domain;
 import java.util.List;
 
 import javax.annotation.Generated;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.ManyToAny;
 
@@ -19,28 +21,37 @@ public class Book implements IBook {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private Integer id;
 	
 	private String title;
 	private String isbn;
+	private String author;
 	private int price;
 	private String publish_date;
 	private GenreEnum genre;
 	private String shelf;
 	private String country;
 	
+//	@OneToMany(cascade = CascadeType.REMOVE)
+//	@JoinColumn(name="author")
+//	private List<Author> authors;
+//	
+//	@OneToMany(cascade=CascadeType.REMOVE)
+//	@JoinColumn(name="copy")
+//	private List<Copies> copies;
+	
 	//relationships are here
-	@ManyToOne(targetEntity = Loan.class)
-	@JoinColumn(name="loan_fk")
-	private Loan loan;
-	
-	@ManyToOne(targetEntity = Author.class)
-	@JoinColumn(name="author_fk")
-	private Author author;
-	
-	@ManyToOne(targetEntity = Publisher.class)
-	@JoinColumn(name="publisher_fk")
-	private Publisher publishe_fk;
+//	@ManyToOne
+//	@JoinColumn(name="loan_fk")
+//	private int loan_fk;
+//	
+//	@ManyToOne
+//	@JoinColumn(name="author_fk")
+//	private int author_fk;
+//	
+//	@ManyToOne
+//	@JoinColumn(name="publisher_fk")
+//	private int publishe_fk;
 	
 	@Override
 	public String getISBN() {
@@ -92,22 +103,26 @@ public class Book implements IBook {
 	}
 
 
-
-	public Book(int id, String title, String isbn, int price, String publish_date, GenreEnum genre, String shelf,
-			String country, Loan loan, Author author, Publisher publishe_fk) {
+public Book(int id, String title, String isbn, String author, int price, String publish_date, GenreEnum genre,
+			String shelf, String country, List<Author> authors, List<Copies> copies, int loan_fk, int author_fk,
+			int publishe_fk) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.isbn = isbn;
+		this.author = author;
 		this.price = price;
 		this.publish_date = publish_date;
 		this.genre = genre;
 		this.shelf = shelf;
 		this.country = country;
-		this.loan = loan;
-		this.author = author;
-		this.publishe_fk = publishe_fk;
+//		this.authors = authors;
+//		this.copies = copies;
+//		this.loan_fk = loan_fk;
+//		this.author_fk = author_fk;
+//		this.publishe_fk = publishe_fk;
 	}
+
 
 	public Book() {}
 

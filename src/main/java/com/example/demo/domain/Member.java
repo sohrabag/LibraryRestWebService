@@ -42,9 +42,9 @@ public class Member implements IMember {
     @Column(unique = true)
 	private String email;
 	
-	@OneToMany(cascade=CascadeType.REMOVE)
-	@JoinColumn(name="loan")
-	private List<Loan> loans;
+//	@OneToMany(cascade=CascadeType.REMOVE)
+//	@JoinColumn(name="loan")
+//	private List<Loan> loans;
 	
 	private String dob;
 	

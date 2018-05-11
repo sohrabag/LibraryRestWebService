@@ -17,8 +17,8 @@ import com.example.demo.dataaccess.LoanRepository;
 import com.example.demo.dataaccess.MemberRepository;
 import com.example.demo.domain.Member;
 
-@Controller
-@RequestMapping("/member")
+@RestController
+//@RequestMapping("/member")
 public class FirstControler {
 	
 	@Autowired
@@ -31,7 +31,7 @@ public class FirstControler {
 	public ModelAndView firstMethod()
 	{
 		System.out.println("from within LibraryRest");
-		Date dateAndTime = new Date();
+//		Date dateAndTime = new Date();
 		List<Member> members = new ArrayList<Member>();
 		
 //		return new ModelAndView("home", "dateAndTime", dateAndTime);
@@ -47,7 +47,7 @@ public class FirstControler {
 //		return new ModelAndView("home", "dateAndTime", dateAndTime);
 //	}
 	
-	@PostMapping("/")	//POST
+	@PostMapping("/add")	//POST
 	public Member addMember(@Valid @RequestBody Member member)
 	{
 		System.out.println("from within addMember");

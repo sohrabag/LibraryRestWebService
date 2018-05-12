@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.dataaccess.LoanRepository;
 import com.example.demo.dataaccess.MemberRepository;
 import com.example.demo.domain.Member;
+import com.example.demo.services.MemberManagementService;
 
 @RestController
 //@RequestMapping("/member")
@@ -24,17 +25,21 @@ public class FirstControler {
 	LoanRepository loanRep;
 	
 	@Autowired
-	MemberRepository memberRep;
+	MemberManagementService MMS;
 	
 	@RequestMapping("/home")
 	public ModelAndView firstMethod()
 	{
 		System.out.println("from within LibraryRest");
-//		Date dateAndTime = new Date();
 		List<Member> members = new ArrayList<Member>();
 		
-//		return new ModelAndView("home", "dateAndTime", dateAndTime);
 		return new ModelAndView("home","members", members);
+	}
+	
+	@RequestMapping("/members") //GET
+	public List<Member> getAllMembers()
+	{
+		return MMS.findAll();
 	}
 	
 //	@RequestMapping("/id/{id}")	//GET
@@ -51,7 +56,7 @@ public class FirstControler {
 	{
 		System.out.println("from within addMember");
 		
-		return memberRep.save(member);
+		return MMS.create(member);
 	}
 
 }

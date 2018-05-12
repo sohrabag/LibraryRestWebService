@@ -18,19 +18,19 @@ public class BookManagementService implements IBookManagementService {
 	}
 
 	@Override
-	public Object update(int bookId, Object changedBook) {
+	public Book update(int bookId, Object changedBook) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Object read(int bookId) {
+	public Book read(int bookId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Object search(int bookId) {
+	public Book search(int bookId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

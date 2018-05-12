@@ -14,7 +14,7 @@ import com.example.demo.domain.interfaces.IMember;
 public class Member implements IMember {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 
     @NotNull
@@ -41,30 +41,65 @@ public class Member implements IMember {
 //	@JoinColumn(name="loan")
 //	private List<Loan> loans;
 	
+    @NotNull
+    @Size(max = 100)
+    @Column(unique = true)
 	private String dob;
 	
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return this.name;
 	}
 
 	@Override
 	public String getAddress() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return this.address;
 	}
 
 	@Override
 	public String getPhone() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return this.phone;
 	}
 
 	@Override
 	public String getEmail() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return this.email;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getDob() {
+		return dob;
+	}
+
+	public void setDob(String dob) {
+		this.dob = dob;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

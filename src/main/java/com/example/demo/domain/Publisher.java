@@ -12,7 +12,7 @@ public class Publisher implements IPublisher {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private Integer id;
 	
 	
 	public Publisher() {

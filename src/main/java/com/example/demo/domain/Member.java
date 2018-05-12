@@ -1,14 +1,13 @@
 package com.example.demo.domain;
 
-import java.util.List;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-import com.example.demo.domain.interfaces.ILoan;
 import com.example.demo.domain.interfaces.IMember;
 
 @Entity
@@ -16,14 +15,31 @@ public class Member implements IMember {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
-	
+	private Integer id;
+
+    @NotNull
+    @Size(max = 100)
+    @Column(unique = true)
 	private String name;
+    
+    @NotNull
+    @Size(max = 100)
+    @Column(unique = true)    
 	private String address;
+    
+    @NotNull
+    @Size(max = 100)
+    @Column(unique = true)
 	private String phone;
+    
+    @NotNull
+    @Size(max = 100)
+    @Column(unique = true)
 	private String email;
-	@OneToMany
-	private List<Loan> loans;
+	
+//	@OneToMany(cascade=CascadeType.REMOVE)
+//	@JoinColumn(name="loan")
+//	private List<Loan> loans;
 	
 	private String dob;
 	

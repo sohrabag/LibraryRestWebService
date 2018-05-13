@@ -19,7 +19,7 @@ import com.example.demo.services.MemberManagementService;
 
 @RestController
 //@RequestMapping("/member")
-public class FirstControler {
+public class MemberController {
 	
 	@Autowired
 	LoanRepository loanRep;

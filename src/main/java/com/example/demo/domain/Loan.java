@@ -1,7 +1,5 @@
 package com.example.demo.domain;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -13,12 +11,7 @@ import javax.persistence.ManyToOne;
 import com.example.demo.domain.interfaces.ILoan;
 
 @Entity
-public class Loan implements ILoan, Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class Loan implements ILoan {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -61,8 +54,8 @@ public class Loan implements ILoan, Serializable {
 
 	@Override
 	public String getDate_return() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return date_return;
 	}
 
 	public Integer getBook_Id() {
@@ -71,6 +64,38 @@ public class Loan implements ILoan, Serializable {
 
 	public void setBook_Id(Integer book_Id) {
 		this.book_Id = book_Id;
+	}
+
+	public String getDate_out() {
+		return date_out;
+	}
+
+	public void setDate_out(String date_out) {
+		this.date_out = date_out;
+	}
+
+	public String getDate_due() {
+		return date_due;
+	}
+
+	public void setDate_due(String date_due) {
+		this.date_due = date_due;
+	}
+
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setDate_return(String date_return) {
+		this.date_return = date_return;
 	}
 
 }

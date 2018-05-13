@@ -3,12 +3,14 @@ package com.example.demo.services;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.demo.dataaccess.BookRepository;
 import com.example.demo.domain.Book;
 import com.example.demo.service.interfaces.IBookManagementService;
 
+@Controller
 public class BookManagementService implements IBookManagementService {
 
 	@Autowired

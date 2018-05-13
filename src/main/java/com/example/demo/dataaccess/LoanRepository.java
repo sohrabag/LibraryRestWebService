@@ -9,4 +9,6 @@ import com.example.demo.domain.Member;
 
 public interface LoanRepository extends JpaRepository<Loan, Integer> {
 	List<Member> findByMemberId(Integer member_id);
+
+	List<Loan> findAllById(int memberId);
 }

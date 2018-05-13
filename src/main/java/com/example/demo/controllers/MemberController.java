@@ -6,7 +6,12 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,45 +23,46 @@ import com.example.demo.domain.Member;
 import com.example.demo.services.MemberManagementService;
 
 @RestController
-//@RequestMapping("/member")
 public class MemberController {
 	
 	@Autowired
-	LoanRepository loanRep;
+	MemberManagementService mms;
 	
-	@Autowired
-	MemberManagementService MMS;
-	
-	@RequestMapping("/home")
-	public ModelAndView firstMethod()
-	{
-		System.out.println("from within LibraryRest");
-		List<Member> members = new ArrayList<Member>();
-		
-		return new ModelAndView("home","members", members);
-	}
-	
-	@RequestMapping("/members") //GET
-	public List<Member> getAllMembers()
-	{
-		return MMS.findAll();
-	}
-	
-//	@RequestMapping("/id/{id}")	//GET
-//	public ModelAndView getMember()
+//	@RequestMapping("/home")
+//	public ModelAndView firstMethod()
 //	{
 //		System.out.println("from within LibraryRest");
-//		Date dateAndTime = new Date();
+//		List<Member> members = new ArrayList<Member>();
 //		
-//		return new ModelAndView("home", "dateAndTime", dateAndTime);
+//		return new ModelAndView("home","members", members);
 //	}
 	
-	@PostMapping("/add")	//POST
+	@GetMapping("/members") //GET
+	public List<Member> getAllMembers()
+	{
+		return mms.findAll();
+	}
+	
+	@PutMapping("/members/{id}")	//GET
+	public Member updateMember(@PathVariable int memberId, 
+									@Valid @RequestBody Member memberToUpdate)
+	{
+		System.out.println("from within @PutMapping");
+		
+		return mms.update(memberId, memberToUpdate);
+	}
+	
+	@PostMapping("/members")	//POST
 	public Member addMember(@Valid @RequestBody Member member)
 	{
 		System.out.println("from within addMember");
 		
-		return MMS.create(member);
+		return mms.create(member);
 	}
 
+	@DeleteMapping("/members/memberId") //DELETE
+	public ResponseEntity<?> deleteMember(@PathVariable int memberId)
+	{
+		return mms.delete(memberId);
+	}
 }

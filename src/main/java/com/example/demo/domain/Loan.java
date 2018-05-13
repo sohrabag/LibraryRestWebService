@@ -1,5 +1,7 @@
 package com.example.demo.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,7 +13,7 @@ import javax.persistence.ManyToOne;
 import com.example.demo.domain.interfaces.ILoan;
 
 @Entity
-public class Loan implements ILoan {
+public class Loan implements ILoan, Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

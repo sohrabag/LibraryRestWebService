@@ -22,11 +22,11 @@ public class Loan implements ILoan, Serializable {
 	private String date_out;
 	private String date_due;
 	private String date_return;
-	private Integer book_Id;
+//	private Integer book_Id;
 //	
-//	@OneToMany(cascade=CascadeType.REMOVE)
-//	@JoinColumn(name="book")
-//	private List<Book> books;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="book_id",nullable=false)
+	private Book book;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="member_id",nullable=false)
@@ -60,13 +60,13 @@ public class Loan implements ILoan, Serializable {
 		return date_return;
 	}
 
-	public Integer getBook_Id() {
-		return book_Id;
-	}
-
-	public void setBook_Id(Integer book_Id) {
-		this.book_Id = book_Id;
-	}
+//	public Integer getBook_Id() {
+//		return book_Id;
+//	}
+//
+//	public void setBook_Id(Integer book_Id) {
+//		this.book_Id = book_Id;
+//	}
 
 	public String getDate_out() {
 		return date_out;

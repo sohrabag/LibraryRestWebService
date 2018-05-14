@@ -3,9 +3,12 @@ package com.example.demo.domain;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import com.example.demo.domain.interfaces.IBook;
 
@@ -32,10 +35,6 @@ public class Book implements IBook {
 //	@JoinColumn(name="copy")
 //	private List<Copies> copies;
 	
-	//relationships are here
-//	@ManyToOne
-//	@JoinColumn(name="loan_fk")
-//	private int loan_fk;
 //	
 //	@ManyToOne
 //	@JoinColumn(name="author_fk")

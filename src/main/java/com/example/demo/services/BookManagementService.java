@@ -1,8 +1,11 @@
 package com.example.demo.services;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -58,9 +61,19 @@ public class BookManagementService implements IBookManagementService {
 	}
 
 	@Override
-	public void delete(int bookId) {
-		bookRep.deleteById(bookId);
+	public ResponseEntity<?> delete(int bookId) {
 		
+		return bookRep.findById(bookId).map(book -> {
+			bookRep.delete(book);
+			return ResponseEntity.ok().build();
+		}).orElseThrow(() -> new ResourceNotFoundException("bookId" + bookId + "not found"));
+	
+	}
+
+	@Override
+	public List<Book> getAllBooks() {
+		
+		return bookRep.findAll();
 	}
 
 }

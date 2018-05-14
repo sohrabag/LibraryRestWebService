@@ -116,5 +116,57 @@ public Book(int id, String title, String isbn, String author, int price, String 
 
 	public Book() {}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getIsbn() {
+		return isbn;
+	}
+
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	public String getPublish_date() {
+		return publish_date;
+	}
+
+	public void setPublish_date(String publish_date) {
+		this.publish_date = publish_date;
+	}
+
+	public String getShelf() {
+		return shelf;
+	}
+
+	public void setShelf(String shelf) {
+		this.shelf = shelf;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public void setGenre(GenreEnum genre) {
+		this.genre = genre;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
 	
 }

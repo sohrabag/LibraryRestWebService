@@ -1,9 +1,5 @@
 package com.example.demo.service.interfaces;
 
-import javax.validation.Valid;
-
-import org.springframework.web.bind.annotation.RequestBody;
-
 import com.example.demo.domain.Book;
 
 public interface IBookManagementService {
@@ -11,5 +7,5 @@ public interface IBookManagementService {
 	void delete(int bookId);
 	Book update(int bookId, Book changedBook);
 	Book read(int bookId);
-	Book search(int bookId);
+	boolean search(int bookId);
 }

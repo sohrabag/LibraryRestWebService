@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.domain.Book;
 import com.example.demo.domain.Loan;
 import com.example.demo.services.LoanManagemnetService;
 
@@ -52,5 +53,12 @@ public class LoanController {
 												@PathVariable(value="loanId") int loanId)
 	{
 		return lms.delete(memberId, loanId);
+	}
+	
+	@PostMapping("/members/loans/{loanId}/books/{bookId}")
+	public Loan createLoanByBookId(@PathVariable int loanId, @PathVariable int bookId, 
+									@RequestBody Book book)
+	{
+		return lms.createLoanByBookId(loanId, bookId, book);
 	}
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
+import com.example.demo.domain.Book;
 import com.example.demo.domain.Loan;
 
 public interface ILoanManagementService {
@@ -14,4 +15,5 @@ public interface ILoanManagementService {
 	Loan search(int loanId);
 	List<Loan> findAll();
 	List<Loan> getLoansByMemberId(int memberId);
+	Loan createLoanByBookId(int loanId, int bookId, Book book);
 }

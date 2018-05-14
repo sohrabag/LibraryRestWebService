@@ -100,4 +100,12 @@ public class Loan implements ILoan, Serializable {
 		this.date_return = date_return;
 	}
 
+	public Book getBook() {
+		return book;
+	}
+
+	public void setBook(Book book) {
+		this.book = book;
+	}
+
 }

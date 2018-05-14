@@ -2,12 +2,15 @@ package com.example.demo.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.client.ResourceAccessException;
 
+import com.example.demo.dataaccess.BookRepository;
 import com.example.demo.dataaccess.LoanRepository;
 import com.example.demo.dataaccess.MemberRepository;
+import com.example.demo.domain.Book;
 import com.example.demo.domain.Loan;
 import com.example.demo.jpa.exception.ResourceNotFoundException;
 import com.example.demo.service.interfaces.ILoanManagementService;
@@ -15,9 +18,13 @@ import com.example.demo.service.interfaces.ILoanManagementService;
 @Controller
 public class LoanManagemnetService implements ILoanManagementService {
 	
+	@Autowired
 	private LoanRepository loanRep;
+	@Autowired
 	private MemberRepository memberRep;
-
+	@Autowired
+	private BookRepository BookRep;
+	
 	@Override
 	public Loan create(int memberId, Loan loan) {
 		return memberRep.findById(memberId).map( mem -> {
@@ -79,6 +86,20 @@ public class LoanManagemnetService implements ILoanManagementService {
 	public List<Loan> getLoansByMemberId(int memberId) {
 		
 		return loanRep.findAllById(memberId);
+	}
+
+	@Override
+	public Loan createLoanByBookId(int loanId, int bookId, Book book) {
+
+		if(!loanRep.existsById(loanId))
+		{
+			throw new ResourceNotFoundException("loanId" + loanId + "not found");
+		}
+		
+		return loanRep.findById(loanId).map(loan -> {
+			loan.setBook(book);
+			return loanRep.save(loan);
+		}).orElseThrow(() -> new ResourceNotFoundException("loanId" + loanId + "not found"));
 	}
 	
 	

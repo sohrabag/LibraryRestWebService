@@ -6,9 +6,8 @@ import com.example.demo.domain.Book;
 import com.example.demo.domain.GenreEnum;
 
 public interface IBook {
-	String getISBN();
 	String getTitle();
-	GenreEnum getGenre();
+	String getGenre();
 	String getPositionInLibrary();
 	String getCountry();
 	int getNumberOfCopies();

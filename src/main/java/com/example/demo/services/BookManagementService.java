@@ -54,8 +54,8 @@ public class BookManagementService implements IBookManagementService {
 	}
 
 	@Override
-	public Book create(@Valid @RequestBody Book book) {
-		
+	public Book create(Book book) {
+		System.out.println("from within BookManagementService.create method");
 		return bookRep.save(book);
 		
 	}

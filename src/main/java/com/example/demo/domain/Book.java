@@ -18,9 +18,9 @@ public class Book implements IBook {
 	
 	private String title;
 	private String isbn;
-	private int price;
+	private double price;
 	private String publish_date;
-	private GenreEnum genre;
+	private String genre;
 	private String shelf;
 	private String country;
 
@@ -45,46 +45,41 @@ public class Book implements IBook {
 //	@JoinColumn(name="publisher_fk")
 //	private int publishe_fk;
 	
-	@Override
-	public String getISBN() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	//methods starts here
 	@Override
 	public String getTitle() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return this.title;
 	}
 
 	@Override
-	public GenreEnum getGenre() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getGenre() {
+		
+		return this.genre;
 	}
 
 	@Override
 	public String getPositionInLibrary() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public String getCountry() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return this.country;
 	}
 
 	@Override
 	public int getNumberOfCopies() {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
 	@Override
 	public List<Book> getListByAuthor() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
@@ -95,7 +90,7 @@ public class Book implements IBook {
 	}
 
 
-public Book(int id, String title, String isbn, String author, int price, String publish_date, GenreEnum genre,
+public Book(int id, String title, String isbn, String author, double price, String publish_date, String genre,
 			String shelf, String country, List<Author> authors, List<Copies> copies, int loan_fk, int author_fk,
 			int publishe_fk) {
 		super();
@@ -132,11 +127,11 @@ public Book(int id, String title, String isbn, String author, int price, String 
 		this.isbn = isbn;
 	}
 
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
@@ -160,7 +155,7 @@ public Book(int id, String title, String isbn, String author, int price, String 
 		this.title = title;
 	}
 
-	public void setGenre(GenreEnum genre) {
+	public void setGenre(String genre) {
 		this.genre = genre;
 	}
 

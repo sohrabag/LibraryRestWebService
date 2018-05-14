@@ -1,5 +1,8 @@
 package com.example.demo.controllers;
 
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,18 +17,22 @@ import com.example.demo.services.BookManagementService;
 
 @RestController
 public class BookController {
-	private BookManagementService bms;
+	
+	@Autowired
+	BookManagementService bms;
 	
 	@GetMapping("/members/books/findBook/{bookId}")
-	public Book getBookById(int bookId)
+	public Book getBookById(@PathVariable int bookId)
 	{
 		return bms.read(bookId);
 	}
 	
 	@PostMapping(value = "/members/books/addBook")
-	public Book createNewBook(@RequestBody Book book) {
-		
+	public Book create(@Valid @RequestBody Book book) {
+		if(book == null)
+			System.out.println("from within createNewBook");
 		return bms.create(book);
+		//return null;
 	}
 	
 	@PutMapping(value = "/members/books/book/{bookId}")

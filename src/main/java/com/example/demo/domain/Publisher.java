@@ -39,4 +39,13 @@ public class Publisher implements IPublisher {
 		return null;
 	}
 
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	
 }

@@ -20,7 +20,7 @@ public class PublisherManagementService implements IPublisherManagementService {
 	@Override
 	public Publisher create(Publisher publisher) {
 		
-		return publishRep.save(publisher);
+		return publisherRep.save(publisher);
 	}
 
 	@Override

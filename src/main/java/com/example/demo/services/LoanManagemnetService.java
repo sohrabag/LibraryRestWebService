@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import com.example.demo.dataaccess.LoanRepository;
 import com.example.demo.dataaccess.MemberRepository;
 import com.example.demo.domain.Book;
 import com.example.demo.domain.Loan;
+import com.example.demo.domain.Member;
 import com.example.demo.jpa.exception.ResourceNotFoundException;
 import com.example.demo.service.interfaces.ILoanManagementService;
 
@@ -23,14 +25,32 @@ public class LoanManagemnetService implements ILoanManagementService {
 	@Autowired
 	private MemberRepository memberRep;
 	@Autowired
-	private BookRepository BookRep;
+	private BookRepository bookRep;
 	
 	@Override
-	public Loan create(int memberId, Loan loan) {
+	public Loan create1(int memberId, int bookId, Loan loan) {
+		
+		System.out.println("from within LoanManagementService.create method");
+		Optional<Book> existing = bookRep.findById(bookId);
+		Optional<Member> member = memberRep.findById(memberId);
+		if(existing.isPresent() && member.isPresent()) {
+			Book existingBook = existing.get();
+			Member existingMember = member.get();
+			loan.setBook(existingBook);
+			loan.setMember(existingMember);
+		}
+		
+		return loanRep.save(loan);
+
+	}
+	
+	@Override
+	public Loan create(int memberId, int bookId, Loan loan) {
+		System.out.println("LoanManagementService.create method");
 		return memberRep.findById(memberId).map( mem -> {
 			loan.setMember(mem);
 			return loanRep.save(loan);
-		}).orElseThrow(() -> new ResourceAccessException("" + memberId + "not found"));
+		}).orElseThrow(() -> new ResourceNotFoundException("memberId" + memberId + "not found"));
 	}
 
 	@Override
@@ -66,14 +86,18 @@ public class LoanManagemnetService implements ILoanManagementService {
 
 	@Override
 	public Loan read(int memberId, int loanId) {
+		if(!loanRep.existsById(loanId))
+		{
+			throw new ResourceNotFoundException("loanId" + loanId + "not found");
+		}
 		
-		return null;
+		return loanRep.findById(loanId).get();
 	}
 
 	@Override
-	public Loan search(int loanId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Loan> search(int loanId) {
+		
+		return loanRep.findAllById(loanId);
 	}
 
 	@Override
@@ -89,7 +113,7 @@ public class LoanManagemnetService implements ILoanManagementService {
 	}
 
 	@Override
-	public Loan createLoanByBookId(int loanId, int bookId, Book book) {
+	public Loan createLoanByBookId(int loanId, Book book) {
 
 		if(!loanRep.existsById(loanId))
 		{
@@ -101,6 +125,5 @@ public class LoanManagemnetService implements ILoanManagementService {
 			return loanRep.save(loan);
 		}).orElseThrow(() -> new ResourceNotFoundException("loanId" + loanId + "not found"));
 	}
-	
 	
 }

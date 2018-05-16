@@ -32,7 +32,6 @@ public class BookController {
 		if(book == null)
 			System.out.println("from within createNewBook");
 		return bms.create(book);
-		//return null;
 	}
 	
 	@PutMapping(value = "/members/books/book/{bookId}")

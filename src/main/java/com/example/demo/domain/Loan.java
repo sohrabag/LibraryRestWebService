@@ -2,6 +2,7 @@ package com.example.demo.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -22,13 +23,12 @@ public class Loan implements ILoan, Serializable {
 	private String date_out;
 	private String date_due;
 	private String date_return;
-//	private Integer book_Id;
-//	
-	@ManyToOne(fetch=FetchType.LAZY)
+	
+	@ManyToOne(fetch=FetchType.LAZY, cascade= {CascadeType.PERSIST,CascadeType.MERGE})
 	@JoinColumn(name="book_id",nullable=false)
 	private Book book;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.LAZY, cascade={CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name="member_id",nullable=false)
 	private Member member;
 	
@@ -38,20 +38,20 @@ public class Loan implements ILoan, Serializable {
 	
 	@Override
 	public int getId() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return this.id;
 	}
 
 	@Override
 	public String getDateOut() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return this.date_out;
 	}
 
 	@Override
 	public String getDateDue() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return this.date_due;
 	}
 
 	@Override

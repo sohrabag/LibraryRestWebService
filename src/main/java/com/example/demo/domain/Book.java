@@ -1,7 +1,9 @@
 package com.example.demo.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -13,7 +15,7 @@ import javax.persistence.ManyToOne;
 import com.example.demo.domain.interfaces.IBook;
 
 @Entity
-public class Book implements IBook {
+public class Book implements IBook, Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -27,22 +29,19 @@ public class Book implements IBook {
 	private String shelf;
 	private String country;
 
-//	@OneToMany(cascade = CascadeType.REMOVE)
-//	@JoinColumn(name="author")
-//	private List<Author> authors;
-//	
+	
 //	@OneToMany(cascade=CascadeType.REMOVE)
 //	@JoinColumn(name="copy")
 //	private List<Copies> copies;
 	
 //	
-//	@ManyToOne
-//	@JoinColumn(name="author_fk")
-//	private int author_fk;
-//	
-//	@ManyToOne
-//	@JoinColumn(name="publisher_fk")
-//	private int publishe_fk;
+	@ManyToOne(fetch=FetchType.LAZY, cascade= {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinColumn(name="author_id", nullable=false)
+	private Author author;
+	
+	@ManyToOne(fetch=FetchType.LAZY, cascade= {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinColumn(name="publisher_id")
+	private Publisher publishe;
 	
 
 	//methods starts here

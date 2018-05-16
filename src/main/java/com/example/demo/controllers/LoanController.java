@@ -33,10 +33,23 @@ public class LoanController {
 	
 	@PostMapping("/members/{memberId}/addLoan")
 	public Loan createLoan(@PathVariable(value="memberId")int memberId,
+							@PathVariable(value="bookId")int bookId,
 								@Valid @RequestBody Loan loan)
 	{
-		
-		return lms.create(memberId, loan);
+		System.out.println("from within createLoan");
+		return lms.create(memberId, bookId, loan);
+	}
+	
+	// @GetMapping("/loans/{id}/book/{bookId}")
+	
+	// @PostMapping("/loans/member/{memberId}")
+	
+	@PostMapping("/loans/members/{memberId}/books/{bookId}/addLoan")
+	public Loan createLoan1(@PathVariable int memberId,
+								@PathVariable int bookId, @RequestBody Loan loan)
+	{
+		System.out.println("from within createLoan(Loan loan)");
+		return lms.create1(memberId, bookId, loan);
 	}
 	
 	@PutMapping("/members/{memberId}/loans/{loanId}")
@@ -55,10 +68,10 @@ public class LoanController {
 		return lms.delete(memberId, loanId);
 	}
 	
-	@PostMapping("/members/loans/{loanId}/books/{bookId}")
-	public Loan createLoanByBookId(@PathVariable int loanId, @PathVariable int bookId, 
+	@PostMapping("/members/loans/{loanId}")
+	public Loan createLoanByBookId(@PathVariable int loanId, 
 									@RequestBody Book book)
 	{
-		return lms.createLoanByBookId(loanId, bookId, book);
+		return lms.createLoanByBookId(loanId, book);
 	}
 }

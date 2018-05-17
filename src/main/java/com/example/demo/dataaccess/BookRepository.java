@@ -3,11 +3,17 @@ package com.example.demo.dataaccess;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.example.demo.domain.Book;
 
 public interface BookRepository extends JpaRepository<Book, Integer> {
 	public List<Book> findAllById(int bookId);
+	
+	@Query("SELECT b FROM Book b order by b.title asc")
+	public List<Book> sortAllByTitle();
+	
+	List<Book> findAllByOrderByTitleAsc();
 	
 //    @Query("SELECT t.title FROM Todo t where t.id = :id") 
 //    String findTitleById(@Param("id") Long id);

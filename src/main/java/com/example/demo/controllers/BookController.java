@@ -39,6 +39,12 @@ public class BookController {
 		return bms.create(authorId, publisherId, book);
 	}
 	
+	/**
+	 * 
+	 * @param bookId
+	 * @param book
+	 * @return
+	 */
 	@PutMapping(value = "/members/books/book/{bookId}")
 	public Book updateBook(@PathVariable int bookId, 
 							@RequestBody Book book)
@@ -52,10 +58,24 @@ public class BookController {
 		return bms.delete(bookId);
 	}
 	
+	/**
+	 * 
+	 * @param bookId
+	 * @return Return List of books
+	 */
 	@RequestMapping(value = "/members/books/{bookId}")
 	public List<Book> search(@RequestParam int bookId)
 	{
-		return bms.search(bookId);
+		return bms.searchById(bookId);
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
+	@GetMapping(value = "/members/books/sort")
+	public List<Book> sortByTitle()
+	{
+		return bms.sortByTitle();
+	}
 }

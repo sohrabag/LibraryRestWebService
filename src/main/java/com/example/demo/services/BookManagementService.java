@@ -105,5 +105,11 @@ public class BookManagementService implements IBookManagementService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	public List<Book> sortByTitle()
+	{
+		//return bookRep.sortAllByTitle();
+		return bookRep.findAllByOrderByTitleAsc();
+	}
+	
 }

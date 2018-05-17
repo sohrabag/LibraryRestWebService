@@ -78,9 +78,20 @@ public class PublisherManagementService implements IPublisherManagementService {
 	}
 
 	@Override
-	public Publisher updatePublisher(int publisherId, Publisher publisher) {
+	public Publisher updatePublisher(int publisherId, Publisher changedPublisher) {
+
+		if(!publisherRep.existsById(publisherId))
+		{
+			throw new ResourceNotFoundException("publisherId" + publisherId + "not found");
+		}
 		
-		return null;
+		return publisherRep.findById(publisherId).map(publisher -> {
+			publisher.setName(changedPublisher.getName());
+			
+			return publisherRep.save(publisher);
+		}).orElseThrow(() -> new ResourceNotFoundException("publisherId" + publisherId + "not found"));
+
+
 	}
 
 }

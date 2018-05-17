@@ -1,5 +1,7 @@
 package com.example.demo.controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.dataaccess.BookRepository;
 import com.example.demo.domain.Book;
 import com.example.demo.services.BookManagementService;
 
@@ -27,11 +32,11 @@ public class BookController {
 		return bms.read(bookId);
 	}
 	
-	@PostMapping(value = "/members/books/addBook")
-	public Book create(@Valid @RequestBody Book book) {
+	@PostMapping(value = "/members/author/{authorId}/publisher/{publisherId}/books/addBook")
+	public Book create(@PathVariable int authorId, @PathVariable int publisherId, @Valid @RequestBody Book book) {
 		if(book == null)
 			System.out.println("from within createNewBook");
-		return bms.create(book);
+		return bms.create(authorId, publisherId, book);
 	}
 	
 	@PutMapping(value = "/members/books/book/{bookId}")
@@ -45,6 +50,12 @@ public class BookController {
 	public ResponseEntity<?> deleteBook(@PathVariable int bookId)
 	{
 		return bms.delete(bookId);
+	}
+	
+	@RequestMapping(value = "/members/books/{bookId}")
+	public List<Book> search(@RequestParam int bookId)
+	{
+		return bms.search(bookId);
 	}
 
 }

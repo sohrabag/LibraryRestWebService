@@ -1,6 +1,5 @@
 package com.example.demo.domain;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,7 +14,7 @@ import javax.persistence.ManyToOne;
 import com.example.demo.domain.interfaces.IBook;
 
 @Entity
-public class Book implements IBook, Serializable{
+public class Book implements IBook {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -159,6 +158,22 @@ public Book(int id, String title, String isbn, String author, double price, Stri
 
 	public void setCountry(String country) {
 		this.country = country;
+	}
+
+	public Author getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(Author author) {
+		this.author = author;
+	}
+
+	public Publisher getPublishe() {
+		return publishe;
+	}
+
+	public void setPublishe(Publisher publishe) {
+		this.publishe = publishe;
 	}
 
 	

@@ -22,7 +22,7 @@ public class AuthorController {
 	AuthorManagementService ams;
 	
 	@PostMapping(value = "/authors/addAuthor")
-	public Author create( @RequestBody Author author)
+	public Author create( @Valid @RequestBody Author author)
 	{
 		return ams.create(author);
 	}

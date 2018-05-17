@@ -1,24 +1,32 @@
 package com.example.demo.services;
 
 import java.util.List;
-
-import javax.validation.Valid;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.stereotype.Component;
 
+import com.example.demo.dataaccess.AuthorRepository;
 import com.example.demo.dataaccess.BookRepository;
+import com.example.demo.dataaccess.PublisherRepository;
+import com.example.demo.domain.Author;
 import com.example.demo.domain.Book;
+import com.example.demo.domain.Publisher;
 import com.example.demo.jpa.exception.ResourceNotFoundException;
 import com.example.demo.service.interfaces.IBookManagementService;
 
-@Controller
+@Component
 public class BookManagementService implements IBookManagementService {
 
 	@Autowired
 	BookRepository bookRep;
+	
+	@Autowired
+	AuthorRepository authorRep;
+	
+	@Autowired
+	PublisherRepository publisherRep;
 	
 	@Override
 	public Book update(int bookId, Book changedBook) {
@@ -48,14 +56,24 @@ public class BookManagementService implements IBookManagementService {
 	}
 
 	@Override
-	public boolean search(int bookId) {
+	public List<Book> searchById(int bookId) {
 
-		return bookRep.existsById(bookId);
+		if(!bookRep.existsById(bookId))
+		{
+			throw new ResourceNotFoundException("bookId" + bookId + "not found");
+		}
+		
+		return bookRep.findAllById(bookId);
 	}
 
 	@Override
-	public Book create(Book book) {
+	public Book create(int authorId, int publisherId, Book book) {
 		System.out.println("from within BookManagementService.create method");
+		Optional<Author> existingAuthor = authorRep.findById(authorId);
+		Optional<Publisher> existingPublisher = publisherRep.findById(publisherId);
+		
+		book.setAuthor(existingAuthor.get());
+		book.setPublishe(existingPublisher.get());
 		return bookRep.save(book);
 		
 	}
@@ -74,6 +92,18 @@ public class BookManagementService implements IBookManagementService {
 	public List<Book> getAllBooks() {
 		
 		return bookRep.findAll();
+	}
+
+	@Override
+	public List<Book> searchByTitle(String title) {
+		
+		return null;
+	}
+
+	@Override
+	public List<Book> searchByAuthorName(String authorName) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

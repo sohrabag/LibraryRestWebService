@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.ResourceAccessException;
 
 import com.example.demo.dataaccess.BookRepository;
@@ -17,7 +17,7 @@ import com.example.demo.domain.Member;
 import com.example.demo.jpa.exception.ResourceNotFoundException;
 import com.example.demo.service.interfaces.ILoanManagementService;
 
-@Controller
+@Component
 public class LoanManagemnetService implements ILoanManagementService {
 	
 	@Autowired

@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 import com.example.demo.domain.interfaces.IAuthor;
 
 @Entity
-public class Author implements IAuthor, Serializable {
+public class Author implements IAuthor {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -20,11 +20,13 @@ public class Author implements IAuthor, Serializable {
 	
 	@NotNull
 	@Size(max=100)
+	@Size(min=5)
 	@Column(unique=true)
 	private String name;
 	
 	@NotNull
 	@Size(max=100)
+	@Size(min=5)
 	@Column(unique=true)
 	private String dob;
 //	

@@ -4,14 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
 
 import com.example.demo.dataaccess.PublisherRepository;
 import com.example.demo.domain.Publisher;
 import com.example.demo.jpa.exception.ResourceNotFoundException;
 import com.example.demo.service.interfaces.IPublisherManagementService;
 
-@Controller
+@Component
 public class PublisherManagementService implements IPublisherManagementService {
 
 	@Autowired

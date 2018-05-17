@@ -19,21 +19,25 @@ public class Member implements IMember {
 
     @NotNull
     @Size(max = 100)
+    @Size(min=5)
     @Column(unique = true)
 	private String name;
     
     @NotNull
     @Size(max = 100)
+    @Size(min=5)
     @Column(unique = true)    
 	private String address;
     
     @NotNull
     @Size(max = 100)
+    @Size(min=5)
     @Column(unique = true)
 	private String phone;
     
     @NotNull
     @Size(max = 100)
+    @Size(min=5)
     @Column(unique = true)
 	private String email;
 	
@@ -43,6 +47,7 @@ public class Member implements IMember {
 	
     @NotNull
     @Size(max = 100)
+    @Size(min=5)
     @Column(unique = true)
 	private String dob;
 	

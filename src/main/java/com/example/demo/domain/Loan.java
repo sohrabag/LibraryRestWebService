@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 import com.example.demo.domain.interfaces.ILoan;
 
 @Entity
-public class Loan implements ILoan, Serializable {
+public class Loan implements ILoan {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

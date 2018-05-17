@@ -20,6 +20,7 @@ public class Publisher implements IPublisher {
 	
 	@NotNull
 	@Size(max=100)
+	@Size(min=5)
 	@Column(unique=true)
 	private String name;
 	
@@ -29,14 +30,14 @@ public class Publisher implements IPublisher {
 
 	@Override
 	public int getId() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return this.id;
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return this.name;
 	}
 
 	public void setId(Integer id) {
@@ -46,6 +47,5 @@ public class Publisher implements IPublisher {
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	
 }

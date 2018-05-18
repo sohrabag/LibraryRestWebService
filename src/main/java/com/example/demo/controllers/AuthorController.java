@@ -25,7 +25,7 @@ import com.example.demo.services.AuthorManagementService;
 public class AuthorController {
 
 	/**
-	 * we use dependency injection for service objects
+	 * we use dependency injection(DI) for service objects.
 	 * AuthorManagementService is a service that connects
 	 * to the Author table using JpaRepository interface
 	 */
@@ -33,13 +33,11 @@ public class AuthorController {
 	AuthorManagementService ams;
 	
 	/**
-	 * create api creates a new author in the author table
-	 * author parameter passes in the properties for new author
+	 * create API creates a new author in the author table
 	 * annotation PostMapping marks this method as CRUD operation 
-	 * that can be calld from any client like postman, web broswer 
-	 * or a mobile device
-	 * @param author is an input parameter and entire object must be passed in as JSON type
-	 * @return is a object of type Author
+	 * that supports any client like postman, web browser, and mobile device able to call REST controller 
+	 * @param author : is an input parameter passes entire object in as JSON type
+	 * @return : It returns an object of type Author
 	 */
 	@PostMapping(value = "/authors/addAuthor")
 	public Author create( @Valid @RequestBody Author author)
@@ -47,10 +45,10 @@ public class AuthorController {
 		return ams.create(author);
 	}
 	/**
-	 * Annotation GetMapping idetifies this url as a GET operation of the CRUD operations
-	 * read is a CRUD api and it returns an Author object in JSON format
-	 * @param authorId is the input parameter of type int that is passed in by client
-	 * @return is an object of type Author. entire object will be returned as a JSON type
+	 * Annotation GetMapping identifies this URL as a GET operation of the CRUD operations
+	 * read is a CRUD API.
+	 * @param authorId : input parameter of type integer
+	 * @return :  It returns an object of type Author. Entire object will be returned as a JSON type
 	 */
 	@GetMapping("/authors/{authorId}")
 	public Author read(@PathVariable int authorId)
@@ -61,8 +59,8 @@ public class AuthorController {
 	/**
 	 * Annotation PutMapping identifies that this api is a update operation of CRUD operations
 	 * the uri is in the double quotation marks
-	 * @param authorId : this is input parameter which is of type int and in Author id to be update
-	 * @param changedAuthor : this is input parameter of type Author object which is passed as JSON type
+	 * @param authorId : input parameter Author id to be update
+	 * @param changedAuthor : input parameter of type Author object which is passed as JSON type
 	 * @return is a object of type Author which the update object of type JSON
 	 */
 	@PutMapping("/author/update/{authorId}")

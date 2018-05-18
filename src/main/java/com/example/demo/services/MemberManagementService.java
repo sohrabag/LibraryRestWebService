@@ -5,8 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.dataaccess.LoanRepository;
 import com.example.demo.dataaccess.MemberRepository;
+import com.example.demo.domain.Loan;
 import com.example.demo.domain.Member;
 import com.example.demo.jpa.exception.ResourceNotFoundException;
 import com.example.demo.service.interfaces.IMemberManagementService;
@@ -16,6 +19,9 @@ public class MemberManagementService implements IMemberManagementService {
 	
 	@Autowired
 	MemberRepository memberRep;
+	
+	@Autowired
+	LoanRepository loanRep;
 
 	@Override
 	public Member update(int memberId, Member memberRequest) {
@@ -68,5 +74,16 @@ public class MemberManagementService implements IMemberManagementService {
 		return null;
 	}
 	
+	/**
+	 * fetches all the loans for a member using member id
+	 * @param memberId : input parameter type of integer
+	 * @return : returns List of type Loan
+	 */
+	@RequestMapping(value = "/members/laons/all")
+	public List<Loan> findLoanByMemberId(int memberId)
+	{
+		
+		return null;
+	}
 	
 }

@@ -16,20 +16,32 @@ import com.example.demo.domain.Publisher;
 import com.example.demo.jpa.exception.ResourceNotFoundException;
 import com.example.demo.service.interfaces.IBookManagementService;
 
+/**
+ * BookManagementService service manages all CRUD books operations
+ * @author User
+ *
+ */
 @Component
 public class BookManagementService implements IBookManagementService {
 
+	/**
+	 * spring dependency injection to inject a spring JPA DATA ACCESS object BookRepository
+	 */
 	@Autowired
 	BookRepository bookRep;
-	
+	/**
+	 * spring dependency injection to inject a spring JPA DATA ACCESS object AuthorRepository
+	 */
 	@Autowired
 	AuthorRepository authorRep;
-	
+	/**
+	 * spring dependency injection to inject a spring JPA DATA ACCESS object PublisherRepository
+	 */
 	@Autowired
 	PublisherRepository publisherRep;
-	
+
 	@Override
-	public Book update(int bookId, Book changedBook) {
+	public Book update(int bookId, Book changedBook) throws ResourceNotFoundException{
 		
 		if(!bookRep.existsById(bookId))
 		{
@@ -49,14 +61,14 @@ public class BookManagementService implements IBookManagementService {
 	}
 
 	@Override
-	public Book read(int bookId) {
+	public Book read(int bookId) throws ResourceNotFoundException {
 		
 		return bookRep.findById(bookId).orElseThrow(() -> 
 									new ResourceNotFoundException("bookId" + bookId + "not found"));
 	}
 
 	@Override
-	public List<Book> searchById(int bookId) {
+	public List<Book> searchById(int bookId) throws ResourceNotFoundException {
 
 		if(!bookRep.existsById(bookId))
 		{
@@ -79,7 +91,7 @@ public class BookManagementService implements IBookManagementService {
 	}
 
 	@Override
-	public ResponseEntity<?> delete(int bookId) {
+	public ResponseEntity<?> delete(int bookId) throws ResourceNotFoundException {
 		
 		return bookRep.findById(bookId).map(book -> {
 			bookRep.delete(book);
@@ -95,17 +107,20 @@ public class BookManagementService implements IBookManagementService {
 	}
 
 	@Override
-	public List<Book> searchByTitle(String title) {
+	public List<Book> searchByTitle(String title) throws ResourceNotFoundException{
 		
-		return null;
+		return bookRep.findByTitle(title);
 	}
 
 	@Override
-	public List<Book> searchByAuthorName(String authorName) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Book> searchByAuthorName(String authorName) throws ResourceNotFoundException {
+		
+		return bookRep.findByAuthorName(authorName);
 	}
-	
+	/**
+	 * sorts Books by title
+	 * @return returns a List of Books
+	 */
 	public List<Book> sortByTitle()
 	{
 		//return bookRep.sortAllByTitle();

@@ -57,8 +57,8 @@ public class AuthorController {
 	}
 	
 	/**
-	 * Annotation PutMapping identifies that this api is a update operation of CRUD operations
-	 * the uri is in the double quotation marks
+	 * Annotation PutMapping identifies that this API is a update operation of CRUD operations
+	 * the URI is in the double quotation marks
 	 * @param authorId : input parameter Author id to be update
 	 * @param changedAuthor : input parameter of type Author object which is passed as JSON type
 	 * @return is a object of type Author which the update object of type JSON
@@ -70,9 +70,9 @@ public class AuthorController {
 	}
 	
 	/**
-	 * Annotation DeleteMapping idetifies this api as a delete operation of CRUD operations
-	 * @param authorId : input parameter of type int which identifies id of author to be delete
-	 * @return : returns an ResponsEntity object which is a conmprehensive information about whether 
+	 * Annotation DeleteMapping identifies this API as a delete operation of CRUD operations
+	 * @param authorId : input parameter of type integer which identifies id of author to be delete
+	 * @return : returns an ResponsEntity object which is a comprehensive information about whether 
 	 * delete operation has been successful.
 	 */
 	@DeleteMapping("/authors/delete/{authorId}")

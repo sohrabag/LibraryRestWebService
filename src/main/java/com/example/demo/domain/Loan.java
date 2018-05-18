@@ -1,7 +1,5 @@
 package com.example.demo.domain;
 
-import java.io.Serializable;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -31,11 +29,7 @@ public class Loan implements ILoan {
 	@ManyToOne(fetch=FetchType.LAZY, cascade={CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name="member_id",nullable=false)
 	private Member member;
-	
-//	@OneToMany(cascade=CascadeType.REMOVE)
-//	@JoinColumn(name="copy")
-//	private List<Copies> copies;
-	
+
 	@Override
 	public int getId() {
 		
@@ -59,14 +53,6 @@ public class Loan implements ILoan {
 		
 		return date_return;
 	}
-
-//	public Integer getBook_Id() {
-//		return book_Id;
-//	}
-//
-//	public void setBook_Id(Integer book_Id) {
-//		this.book_Id = book_Id;
-//	}
 
 	public String getDate_out() {
 		return date_out;

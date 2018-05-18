@@ -73,8 +73,7 @@ public class BookController {
 	 * @return : It returns object of type Book in JSON format
 	 */
 	@PutMapping(value = "/members/books/book/{bookId}")
-	public Book updateBook(@PathVariable int bookId, 
-							@RequestBody Book book)
+	public Book updateBook(@PathVariable int bookId, @RequestBody Book book)
 	{
 		return bms.update(bookId, book);
 	}

@@ -11,9 +11,19 @@ import com.example.demo.domain.Author;
 import com.example.demo.jpa.exception.ResourceNotFoundException;
 import com.example.demo.service.interfaces.IAuthorManagementService;
 
+/**
+ * AuthorManagementService is a service that manages the Authors 
+ * @author Sohrab Azami Ghadim
+ * @version 1.0
+ * @since 2018-05-12
+ *
+ */
 @Service
 public class AuthorManagementService implements IAuthorManagementService {
 
+	/**
+	 * Annotation for spring dependency injection(DI), it injects a author repository object
+	 */
 	@Autowired
 	AuthorRepository authorRep;
 	
@@ -24,7 +34,7 @@ public class AuthorManagementService implements IAuthorManagementService {
 	}
 
 	@Override
-	public ResponseEntity<?> delete(int authorId) {
+	public ResponseEntity<?> delete(int authorId) throws ResourceNotFoundException{
 		if(!authorRep.existsById(authorId))
 		{
 			throw new ResourceNotFoundException("authorId" + authorId + "not found");
@@ -38,7 +48,7 @@ public class AuthorManagementService implements IAuthorManagementService {
 	}
 
 	@Override
-	public Author update(int authorId, Author changedAuthor) {
+	public Author update(int authorId, Author changedAuthor) throws ResourceNotFoundException{
 		if(!authorRep.existsById(authorId))
 		{
 			throw new ResourceNotFoundException("authorId" + authorId + "not found");
@@ -52,7 +62,7 @@ public class AuthorManagementService implements IAuthorManagementService {
 	}
 
 	@Override
-	public Author read(int authorId) {
+	public Author read(int authorId) throws ResourceNotFoundException{
 		if(!authorRep.existsById(authorId))
 		{
 			throw new ResourceNotFoundException("authorId" + authorId + "not found");
@@ -62,7 +72,7 @@ public class AuthorManagementService implements IAuthorManagementService {
 	}
 
 	@Override
-	public List<Author> search(int authorId) {
+	public List<Author> search(int authorId) throws ResourceNotFoundException{
 		if(!authorRep.existsById(authorId))
 		{
 			throw new ResourceNotFoundException("authorId" + authorId + "not found");

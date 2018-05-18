@@ -8,12 +8,40 @@ import org.springframework.data.jpa.repository.Query;
 import com.example.demo.domain.Book;
 
 public interface BookRepository extends JpaRepository<Book, Integer> {
+	
+	/**
+	 * finds all the books by bookdId
+	 * @param bookId : input parameter of type integer
+	 * @return : returns a List of books
+	 */
 	public List<Book> findAllById(int bookId);
 	
+	/**
+	 * sort the books by title
+	 * @return : returns a List of books in sorted order
+	 */
 	@Query("SELECT b FROM Book b order by b.title asc")
 	public List<Book> sortAllByTitle();
 	
+	/**
+	 * sort books by title in ascending order
+	 * @return : returns a List of sorted books
+	 */
 	List<Book> findAllByOrderByTitleAsc();
+	
+	/**
+	 * fetches books by title
+	 * @param title : input parameter of type String
+	 * @return : returns a List of books
+	 */
+	List<Book> findByTitle(String title);
+	
+	/**
+	 * fetches books by author name
+	 * @param authorName : input parameter of type String
+	 * @return : returns a List of Books
+	 */
+	List<Book> findByAuthorName(String authorName);
 	
 //    @Query("SELECT t.title FROM Todo t where t.id = :id") 
 //    String findTitleById(@Param("id") Long id);

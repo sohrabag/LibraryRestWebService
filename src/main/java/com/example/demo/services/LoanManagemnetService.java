@@ -54,7 +54,7 @@ public class LoanManagemnetService implements ILoanManagementService {
 	}
 
 	@Override
-	public ResponseEntity<?> delete(int memberId, int loanId) {
+	public ResponseEntity<?> delete(int memberId, int loanId) throws ResourceNotFoundException{
 		
 		if(!memberRep.existsById(memberId))
 		{
@@ -68,7 +68,7 @@ public class LoanManagemnetService implements ILoanManagementService {
 	}
 
 	@Override
-	public Loan update(int memberId, int loanId, Loan changedLoan) {
+	public Loan update(int memberId, int loanId, Loan changedLoan) throws ResourceNotFoundException{
 		
 		if(!memberRep.existsById(memberId))
 		{
@@ -85,7 +85,7 @@ public class LoanManagemnetService implements ILoanManagementService {
 	}
 
 	@Override
-	public Loan read(int memberId, int loanId) {
+	public Loan read(int loanId) throws ResourceNotFoundException{
 		if(!loanRep.existsById(loanId))
 		{
 			throw new ResourceNotFoundException("loanId" + loanId + "not found");
@@ -107,13 +107,13 @@ public class LoanManagemnetService implements ILoanManagementService {
 	}
 
 	@Override
-	public List<Loan> getLoansByMemberId(int memberId) {
+	public List<Loan> getLoansByMemberId(int memberId) throws ResourceNotFoundException {
 		
 		return loanRep.findAllById(memberId);
 	}
 
 	@Override
-	public Loan createLoanByBookId(int loanId, Book book) {
+	public Loan createLoanByBookId(int loanId, Book book) throws ResourceNotFoundException {
 
 		if(!loanRep.existsById(loanId))
 		{

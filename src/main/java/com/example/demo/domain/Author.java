@@ -1,6 +1,4 @@
 package com.example.demo.domain;
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,15 +27,7 @@ public class Author implements IAuthor {
 	@Size(min=5)
 	@Column(unique=true)
 	private String dob;
-//	
-//	@OneToMany(cascade = CascadeType.REMOVE)
-//	@JoinColumn(name="book")
-//	private List<Book> books;
-//	
-//	@OneToMany(cascade = CascadeType.REMOVE)
-//	@JoinColumn(name="copy")
-//	private List<Copies> copies;
-//	
+	
 	@Override
 	public int getId() {
 		
@@ -55,25 +45,42 @@ public class Author implements IAuthor {
 		
 		return this.dob;
 	}
-
+	/**
+	 * default constructor for Author
+	 */
 	public Author() {
 	}
 
+	/**
+	 * The method returns date of birth property of author
+	 * @return : It is a String
+	 */
 	public String getDob() {
 		return dob;
 	}
 
+	/**
+	 * The method sets the date of birth property of author
+	 * @param dob : input parameter of type String
+	 */
 	public void setDob(String dob) {
 		this.dob = dob;
 	}
 
+	/**
+	 * The method sets the id property of the author
+	 * @param id : input parameter of type integer
+	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
+	/**
+	 * The method sets the name property of the author
+	 * @param name : input parameter of type String
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	
 }

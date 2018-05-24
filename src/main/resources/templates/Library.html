@@ -80,11 +80,6 @@ label {
 	padding: 8px 8px;
 }
 
-.button {
-	margin-left: 100px;
-	background-color: lightblue; 
-}
-
 textarea {
 	background-color: lightblue;
 	margin-left: 100px;
@@ -92,11 +87,16 @@ textarea {
 	width: 20%;
 }
 
-.Authorized
+.Aut{
+background-color: lightblue;
+margin-left: 100px;
+color: white;
+}
+
+.bt
 {
-	background-color: lightblue;
-	margin-left: 100px;
-	color: white;
+margin-left: 100px;
+background-color: lightblue;
 }
 </style>
 </head>
@@ -124,10 +124,13 @@ textarea {
   <input type="text" name="uname"><br /><br />
   <label for="lname">Password:</label>
   <input type="text" name="pname"><br />
-  <input type="submit" value="Submit" />
+  <input class="bt" type="submit" value="Submit" />
   <br />
-  <input class="Authorized" type="text" id="demo" value="Mickey">
+  <!-- <textarea  class="Aut" type="text" id="demo" value="Mickey" rows="" cols=""> -->
 </form>
+<div class="Aut">
+	<p id="demo">Mickey</p>
+</div>
 
 <script type="text/javascript">
 /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */

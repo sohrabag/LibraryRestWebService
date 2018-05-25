@@ -129,7 +129,7 @@ background-color: lightblue;
   <!-- <textarea  class="Aut" type="text" id="demo" value="Mickey" rows="" cols=""> -->
 </form>
 <div class="Aut">
-	<p id="demo">Mickey</p>
+	<p id="pdemo">Mickey</p>
 </div>
 
 <script type="text/javascript">
@@ -148,9 +148,11 @@ function validate()
 	console.log("Hejsna");
 	
 	var x = document.forms["myForm"]["uname"].value;
-	if(x == "me")
+	var y = document.forms["myForm"]["pname"].value;
+
+	if(x == "sohrab" && y=="sohrab")
 	{
-		document.getElementById("demo").value = "you are authorized";
+		document.getElementById("pdemo").innerHTML = "you are authorized";
 	}
 	
 }

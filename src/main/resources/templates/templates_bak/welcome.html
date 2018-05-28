@@ -2,13 +2,14 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- http-equiv="Content-Type" content="text/html; charset=utf-8" -->
 <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style type="text/css">
 body{
 	margin: 0;
 	font-family: Arial, Helvetica, sans-serif;
+    background-image: url("bgdesert.jpg");
+
 }
 /* Add a black background color to the top navigation */
 .topnav {
@@ -70,35 +71,7 @@ body{
     display: block;
     text-align: left;
   }
-}
-
-input[type=text] {
-	padding: 10px 20px;
-	margin: 8px 0;
-	box-sizing: border-box;
-}
-label {
-	padding: 8px 8px;
-}
-
-textarea {
-	background-color: lightblue;
-	margin-left: 100px;
-	color: black;
-	width: 20%;
-}
-
-.Aut{
-background-color: lightblue;
-margin-left: 100px;
-color: white;
-}
-
-.bt
-{
-margin-left: 100px;
-background-color: lightblue;
-}
+} 
 </style>
 </head>
 
@@ -107,32 +80,16 @@ background-color: lightblue;
 <div class="topnav" id="myTopnav">
 <!--   <a href="#home" class="active">Home</a> -->
 <a href="welcome.html" class="active">Home</a>
-  <a href="members.html">Members</a>
-  <a href="books.html">Books</a>
-  <a href="loans.html">Loans</a>
-  <a>""</a>
+  <a href="#news">Members</a>
+  <a href="#contact">Books</a>
+  <a href="#about">About</a>
   <a href="javascript:void(0);" class="icon" onclick="myFunction()">
     <i class="fa fa-bars"></i>
   </a>
 </div> 
-<div style="padding-left:16px;background-color:green;height: 30px;color: black">
-  <h2>Welcome To Simpson Library Loan System</h2>
-<!--   <H2>Welkommen till länken Jag äger</H2> -->
-  <p>Please Enter your User name and password</p>
-</div>
-<br /><br />
-
-<form name="myForm" action="" onsubmit="validate(); return false;"  method="post">
-  <label for="uname">User Name:</label>
-  <input type="text" name="uname"><br /><br />
-  <label for="lname">Password:</label>
-  <input type="text" name="pname"><br />
-  <input class="bt" type="submit" value="Submit" />
-  <br />
-  <!-- <textarea  class="Aut" type="text" id="demo" value="Mickey" rows="" cols=""> -->
-</form>
-<div class="Aut">
-	<p id="pdemo">Mickey</p>
+<div style="padding-left:16px">
+  <h2>Responsive Topnav Example</h2>
+  <p>Resize the browser window to see how it works.</p>
 </div>
 
 <script type="text/javascript">
@@ -145,22 +102,9 @@ function myFunction() {
         x.className = "topnav";
     }
 }
-
-function validate()
-{
-	console.log("Hejsna");
-	
-	var x = document.forms["myForm"]["uname"].value;
-	var y = document.forms["myForm"]["pname"].value;
-
-	if(x == "sohrab" && y=="sohrab")
-	{
-		document.getElementById("pdemo").innerHTML = "you are authorized";
-	}
-	
-}
-
 </script>
 </body>
 </html>
+
+
 

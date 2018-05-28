@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+.sp {
+color: blue;
+display:block;
+width: 100%; 
+
+}
+
+.bt1{
+width: 100px;
+height: 20px;
+}
+div>form {
+color: red;
+background-color: lightblue; 
+}
+</style>
+</head>
+
+<body>
+	<span class="sp">This is a test for span</span>
+	<br />
+	
+	<div>
+		<form action="" id="foname">
+			<p id="pdemo">This is p test</p>
+			Color: <input type="color" name="clr">
+			<br/>
+			Date: <input type="datetime-local" name="dname">
+			<br />
+			<input class="bt1" type="button" id="b1" value="Ok">	
+		</form>
+	</div>
+	
+	<br />
+	
+	<script type="text/javascript">
+
+	function youclickme()
+	{
+		alert("hejsan");
+	}
+	
+	function validate()
+	{
+		console("hejsan");
+		var el = document.getElementById("b1");
+		el.onclick = youclickme;
+	}
+	
+	</script>
+</body>
+</html>

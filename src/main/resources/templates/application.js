@@ -29,10 +29,17 @@ $(document).ready(function() {
                             alert("session opend success");
 
                             var json = JSON.parse(xhr.responseText);
-                            alert(JSON.stringify(json, null, 10));
+                            //alert(JSON.stringify(json, null, 10));
+                            console.log(JSON.stringify(json, null, 10));
+                            $('#results').text('');
+                            		
+                            for(var index in json)
+                            	{
+                            		$('#results').append(json[index].book.title);
+                            	}
 
                         }
                       }
-                      console.log("before xhr.send(null)")
+                      console.log("before xhr.send(null)");
                       xhr.send(null);
 });

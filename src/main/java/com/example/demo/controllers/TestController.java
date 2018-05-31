@@ -10,6 +10,6 @@ public class TestController {
 	@RequestMapping("/")
 	public ModelAndView homePage()
 	{
-		return new ModelAndView("first");
+		return new ModelAndView("testRestController");
 	}
 }

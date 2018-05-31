@@ -1,5 +1,8 @@
 package com.example.demo.services;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -128,6 +131,34 @@ public class BookManagementService implements IBookManagementService {
 	{
 		//return bookRep.sortAllByTitle();
 		return bookRep.findAllByOrderByTitleAsc();
+	}
+	
+	//this is only to test Ajax theory for searching a book
+	public List<Book> searchBooksByLooseMatch(String chars)
+	{
+		List<Book> returnList = new ArrayList<Book>();
+		
+		System.out.println("looking for" + chars);
+		
+		//first fetch all the books from the MySql database
+		List<Book> testBooks = getAllBooks();
+		
+		for(Book next : testBooks)
+		{
+			if(next.getTitle().toUpperCase().contains(chars.toUpperCase()))
+			{
+				returnList.add(next);
+			}
+		}
+		
+		Collections.sort(returnList, new Comparator<Book>() {
+			@Override
+			public int compare(Book book1, Book book2)
+			{
+				return book1.getTitle().compareTo(book2.getTitle());
+			}
+		});
+		return returnList;
 	}
 	
 }

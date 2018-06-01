@@ -42,7 +42,7 @@ public class LoanController {
 	 * @return : It returns a List of loans
 	 */
 	@GetMapping("/loans/members/{memberId}/all")
-	public List<Loan> getLoansByMemberId(@PathVariable int memberId)
+	public List<Loan> getLoansByMemberId(@PathVariable("memberId") int memberId)
 	{
 		return lms.getLoansByMemberId(memberId);
 	}

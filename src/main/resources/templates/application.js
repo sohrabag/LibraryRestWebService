@@ -48,13 +48,13 @@ $(document).ready(function() {
                        * using AJAX theory to make the client side more responsive to the user without slowing 
                        * down the client application. 
                        */
-                        $.getJSON("http://localhost:8080/loans/members/{memberId}/all", 
-                      				{memberId: console.log(parseInt($('#searchBox').val()))}, 
+                        $.getJSON("http://localhost:8080/loans/members/memberId/all", 
+                      				{memberId: parseInt($('#searchBox').val())}, 
                       				function(data) {
                       					console.log("Ajax Succeeded to Call Rest Controller");
                       					console.log("data received " + data);
                       				});
 
                       console.log("before xhr.send(null)");
-                      xhr.send(null);
+//                      xhr.send(null);
 });

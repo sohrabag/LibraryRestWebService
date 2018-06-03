@@ -42,19 +42,87 @@ $(document).ready(function() {
 //                            
 //                        	}
 //                      }
-
+//  console.log("before xhr.send(null)");
+//  xhr.send(null);
                       /* 
                        * The following code is calling AJAX query by using JQuery which calls a rest controller web service 
                        * using AJAX theory to make the client side more responsive to the user without slowing 
                        * down the client application. 
+                       * http://localhost:8080/loans/all
+                       * 
+                       * 
                        */
-                        $.getJSON("http://localhost:8080/loans/members/memberId/all", 
-                      				{memberId: parseInt($('#searchBox').val())}, 
-                      				function(data) {
-                      					console.log("Ajax Succeeded to Call Rest Controller");
-                      					console.log("data received " + data);
-                      				});
+ 
+// 						var x = document.getElementById("searchBox");
+//						x.value = '1';
+//						console.log(parseInt(x.value));
+						var memid = $('#searchBox').val();
+						
+						if(memid.length === 0)
+							{
+								console.log("The memberId string is empty");
+							}
+						else
+							{
+								$.getJSON("http://localhost:8080/loans/members/memberId/all", 
+	                      				{ memberId: parseInt($('#searchBox').val()) }, 
+	                      				function(data) {
+	                      					console.log("Ajax Succeeded to Call Rest Controller");
+	                      					console.log("data received " + data);
+	                      					$("#results").text('');
+	                      					for(var index in data)
+	                      						{
+	                      							$("#results").append('<p>' + data[index].book.title + '</p>');
+	                      						}
+	                      				});
+		                        	console.log(parseInt($('#searchBox').val()));
+							}
 
-                      console.log("before xhr.send(null)");
-//                      xhr.send(null);
+//						$.getJSON("http://localhost:8080/loans/all",  function(data) {
+//								console.log("success calling the rest controller");
+//								alert(JSON.stringify(data, null, 10));
+//								$("#results").text('');
+//								for(var index in data)
+//									{
+//										$("#results").append('<p>' +data[index].book.title + '</p>');
+//									}
+//							console.log("before calling JSON.stringify(data)");
+//							alert(JSON.stringify(data, null, 10));
+//							console.log("after calling JSON.stringify(data)");
+//								var items = [];
+//								$.each(data, function( key, val ) {
+//									items.push( "<li id='" + key + "'>" + val + "</li>");
+//								});
+//								
+//								$( "<ul/>" , {
+//									"class": "my-new-list", 
+//									html: items.join("")
+//								}).appendTo( "body" );
+//						});
 });
+
+function onKeyUpHandler()
+{
+	var memid = $('#searchBox').val();
+	var id = parseInt(memid);
+	var url = "http://localhost:8080/loans/members/" + id + "/all";
+	if(memid.length === 0)
+	{
+		console.log("The memberId string is empty");
+	}
+	else
+		{
+			$.getJSON(url, 
+					{ memberId: id }, 
+					function(data) {
+						console.log("Ajax Succeeded to Call Rest Controller");
+						console.log("data received " + data);
+						$("#results").text('');
+						for(var index in data)
+							{
+								$("#results").append('<p>' + data[index].book.title + '</p>');
+							}
+					});
+				console.log(parseInt($('#searchBox').val()));
+		}
+}

@@ -2,8 +2,8 @@
 
 
 $(document).ready(function() {
-	var x = $("alerts");
-	x.style.display = "none";
+//	var x = $("alerts");
+//	x.style.display = "none";
 
 	
 	function showHide()

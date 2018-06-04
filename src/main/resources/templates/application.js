@@ -106,6 +106,7 @@ function onKeyUpHandler()
 	var memid = $('#searchBox').val();
 	var id = parseInt(memid);
 	var url = "http://localhost:8080/loans/members/" + id + "/all";
+
 	if(memid.length === 0)
 	{
 		console.log("The memberId string is empty");

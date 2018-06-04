@@ -97,6 +97,10 @@ color: white;
 margin-left: 100px;
 background-color: lightblue;
 }
+
+table, td {
+    border: 1px solid black;
+}
 </style>
 </head>
 
@@ -141,10 +145,29 @@ background-color: lightblue;
 <div class="adminForm" style="background-color: #c5bfb7; text-align: center;"  >
 
 	<h3>Administration Form</h3>
-	<form action="" style="background-color: #c5bfb7; text-align: left; margin-left: 10px;display: none" id="alerts">
+	<form action="" style="background-color: #c5bfb7; text-align: left; margin-left: 10px;display: none" id="alerts" onsubmit="fLMEM(); return false;">
 		Alerts For Members:
 		<br />
-		<input type="text" value="">
+		
+	<table id="myTable">
+	  <tr>
+	    <td>Row1 cell1</td>
+	    <td>Row1 cell2</td>
+	  </tr>
+	  <tr>
+	    <td>Row2 cell1</td>
+	    <td>Row2 cell2</td>
+	  </tr>
+	  <tr>
+	    <td>Row3 cell1</td>
+	    <td>Row3 cell2</td>
+	  </tr>
+	</table>
+	<br />
+	
+	<input type="submit" value="Check Members">
+	
+<!-- 		<input type="text" value=""> -->
 		<br />
 		Last Name:
 		<br />
@@ -196,7 +219,21 @@ function validate()
 
 		showHide();
 	}
-	
+
+}
+
+function fLMEM()
+{
+    var table = document.getElementById("myTable");
+	var visible = document.getElementById("alerts");
+    var row = table.insertRow(0);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    cell1.innerHTML = "NEW CELL1";
+    cell2.innerHTML = "NEW CELL2";
+    console.log("before calling visible");
+	visible.style.display = "block";		
+	console.log("after calling visible");	
 }
 
 </script>

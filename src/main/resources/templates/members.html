@@ -174,6 +174,9 @@ input[type=submit] {
     margin-top: 0;
   }
 }
+table, th, td {
+    border: 1px solid black;
+}
 </style>
 </head>
 
@@ -190,7 +193,39 @@ input[type=submit] {
   </a>
 </div> 
 <div class="container" >
-  <form action="action_page.php">
+
+	<form action="" style="background-color: #c5bfb7; text-align: left; margin-left: 10px;display: block" id="alerts" onsubmit="fLMEM(); return false;">
+		Alerts For Members:
+		<br />
+		
+	<table id="myTable">
+		<tr>
+			<th>Address</th>
+			<th>Date Of Birth</th>
+			<th>Email</th>
+			<th>Name</th>
+			<th>Phone</th>
+		</tr>
+		  <tr>
+		    <td>Row1 cell1</td>
+		    <td>Row1 cell2</td>
+		    <td>Row1 cell3</td>
+		    <td>Row1 cell4</td>
+		    <td>Row1 cell5</td>		    		    		    
+		  </tr>
+		  <tr>
+		    <td>Row2 cell1</td>
+		    <td>Row2 cell2</td>
+		  </tr>
+		  <tr>
+		    <td>Row3 cell1</td>
+		    <td>Row3 cell2</td>
+		  </tr>
+		</table>
+		<br />
+	</form>
+
+  <form action="action_page.php" style="background-color: #c5bfb7">
     <div class="row">
       <div class="col-25">
         <label for="fname">First Name</label>
@@ -209,29 +244,50 @@ input[type=submit] {
     </div>
     <div class="row">
       <div class="col-25">
-        <label for="country">Country</label>
+        <label for="dob">Date Of Birth</label>
       </div>
       <div class="col-75">
-        <select id="country" name="country">
+      <input type="text" id="dobirth" placeholder="Your date of birth..">
+<!--         <select id="country" name="country">
           <option value="australia">Australia</option>
           <option value="canada">Canada</option>
           <option value="usa">USA</option>
-        </select>
+        </select> -->
       </div>
     </div>
     <div class="row">
       <div class="col-25">
-        <label for="subject">Subject</label>
+        <label for="address">Address</label>
       </div>
       <div class="col-75">
-        <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+        <input type="text" id="address" name="address" placeholder="Your address..">
       </div>
     </div>
     <div class="row">
-      <input type="submit" value="Submit">
+      <div class="col-25">
+        <label for="email">Email</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="email" name="email" placeholder="Your Email..">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="phone">Phone</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="phone" name="phone" placeholder="Your phone..">
+      </div>
+    </div>
+    
+    <div class="row">
+      <input type="submit" value="Add" style="margin-left: 4px">
+      <input type="submit" value="Modify" style="margin-left: 4px">
+      <input type="submit" value="Delete" style="margin-left: 4px">
     </div>
   </form>
 </div>
+
 <script type="text/javascript">
 /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
 function myFunction() {

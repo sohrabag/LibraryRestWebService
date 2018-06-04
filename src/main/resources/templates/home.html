@@ -46,8 +46,6 @@ body{
     display: none;
 } 
 
-
-
 /* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
 @media screen and (max-width: 600px) {
   .topnav a:not(:first-child) {display: none;}
@@ -104,6 +102,9 @@ background-color: lightblue;
 
 <body>
 
+<script src="jquery.min.js"></script>
+<script src="homeapp.js"></script>
+ 	
 <div class="topnav" id="myTopnav">
 <!--   <a href="#home" class="active">Home</a> -->
 <a href="home.html" class="active">Home</a>
@@ -114,7 +115,8 @@ background-color: lightblue;
   <a href="javascript:void(0);" class="icon" onclick="myFunction()">
     <i class="fa fa-bars"></i>
   </a>
-</div> 
+</div>
+ 
 <div style="padding-left:16px;background-color:green;height: 30px;color: black">
   <h2>Welcome To Simpson Library Loan System</h2>
 <!--   <H2>Welkommen till länken Jag äger</H2> -->
@@ -131,11 +133,31 @@ background-color: lightblue;
   <br />
   <!-- <textarea  class="Aut" type="text" id="demo" value="Mickey" rows="" cols=""> -->
 </form>
+
 <div class="Aut">
 	<p id="pdemo">Mickey</p>
 </div>
 
+<div class="adminForm" style="background-color: #c5bfb7; text-align: center;"  >
+
+	<h3>Administration Form</h3>
+	<form action="" style="background-color: #c5bfb7; text-align: left; margin-left: 10px;display: none" id="alerts">
+		Alerts For Members:
+		<br />
+		<input type="text" value="">
+		<br />
+		Last Name:
+		<br />
+		<input type="text" value="">
+		<br />
+		<br /><br />
+		<input type="submit" value="submit">
+	</form>
+</div>
+
+
 <script type="text/javascript">
+
 /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
 function myFunction() {
     var x = document.getElementById("myTopnav");
@@ -146,8 +168,23 @@ function myFunction() {
     }
 }
 
+function showHide()
+{
+	var visible = document.getElementById("alerts");
+	if(visible.style.display === "none")
+	{
+		visible.style.display = "block";
+	}
+	else
+	{
+		visible.style.display = "none";
+	}
+
+}
+
 function validate()
 {
+	
 	console.log("Hejsna");
 	
 	var x = document.forms["myForm"]["uname"].value;
@@ -156,11 +193,14 @@ function validate()
 	if(x == "sohrab" && y=="sohrab")
 	{
 		document.getElementById("pdemo").innerHTML = "you are authorized";
+
+		showHide();
 	}
 	
 }
 
 </script>
+
 </body>
 </html>
 

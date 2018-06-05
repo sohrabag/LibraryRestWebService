@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="https://www.thymeleaf.org">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style type="text/css">
 .sp {
@@ -194,74 +195,60 @@ table, th, td {
   </a>
 </div> 
 <div class="container">
-
-	<form action="members.html" style="background-color: #c5bfb7; text-align: left; margin-left: 10px;display: block" id="members">
+/* action="#" th:action="@{/members/addMember}" th:object="${member}" method="post" */
+	<form  action="" style="background-color: #c5bfb7; text-align: left; margin-left: 10px;display: block" id="members">
 		List Of Members:
 		<br />
-<div class="myTablediv" style="overflow: hidden; overflow-y: scroll; height: 100px;">
-	<table id="myTable" style="margin-left: 25%; width: 75%; background-color: white;">
-		<tr>
-			<th>Address</th>
-			<th>Date Of Birth</th>
-			<th>Email</th>
-			<th>Name</th>
-			<th>Phone</th>
-		</tr>
-		  <tr>
-		    <td>Row1 cell1</td>
-		    <td>Row1 cell2</td>
-		    <td>Row1 cell3</td>
-		    <td>Row1 cell4</td>
-		    <td>Row1 cell5</td>		    		    		    
-		  </tr>
-		  <tr>
-		    <td>Row2 cell1</td>
-		    <td>Row2 cell2</td>
-		    <td>Row2 cell3</td>
-		    <td>Row2 cell4</td>
-		    <td>Row2 cell5</td>			    
-		  </tr>
-		  <tr>
-		    <td>Row3 cell1</td>
-		    <td>Row3 cell2</td>
-		    <td>Row3 cell3</td>
-		    <td>Row3 cell4</td>
-		    <td>Row3 cell5</td>			    
-		  </tr>
-		</table>
-		<br />
-
-</div>		
+		<div class="myTablediv" style="overflow: hidden; overflow-y: scroll; height: 100px;">
+			<table id="myTable" style="margin-left: 25%; width: 75%; background-color: white;">
+				<tr>
+					<th>Address</th>
+					<th>Date Of Birth</th>
+					<th>Email</th>
+					<th>Name</th>
+					<th>Phone</th>
+				</tr>
+				  <tr>
+				    <td>Row1 cell1</td>
+				    <td>Row1 cell2</td>
+				    <td>Row1 cell3</td>
+				    <td>Row1 cell4</td>
+				    <td>Row1 cell5</td>		    		    		    
+				  </tr>
+				  <tr>
+				    <td>Row2 cell1</td>
+				    <td>Row2 cell2</td>
+				    <td>Row2 cell3</td>
+				    <td>Row2 cell4</td>
+				    <td>Row2 cell5</td>			    
+				  </tr>
+				  <tr>
+				    <td>Row3 cell1</td>
+				    <td>Row3 cell2</td>
+				    <td>Row3 cell3</td>
+				    <td>Row3 cell4</td>
+				    <td>Row3 cell5</td>			    
+				  </tr>
+				</table>
+				<br />
+		</div>		
 	</form>
 
   <form action="" style="background-color: #c5bfb7">
     <div class="row">
       <div class="col-25">
-        <label for="fname">First Name</label>
+        <label for="fname">Name</label>
       </div>
       <div class="col-75">
-        <input type="text" id="fname" name="firstname" placeholder="Your name..">
+        <input type="text" id="name" name="name" placeholder="Your name..">
       </div>
     </div>
-    <div class="row">
-      <div class="col-25">
-        <label for="lname">Last Name</label>
-      </div>
-      <div class="col-75">
-        <input type="text" id="lname" name="lastname" placeholder="Your last name..">
-      </div>
-    </div>
-    <div class="row">
+   <div class="row">
       <div class="col-25">
         <label for="dob">Date Of Birth</label>
       </div>
       <div class="col-75">
-      <input type="text" id="dobirth" placeholder="Your date of birth..">
-<!--         <select id="country" name="country">
-          <option value="australia">Australia</option>
-          <option value="canada">Canada</option>
-          <option value="usa">USA</option>
-        </select> -->
+      	<input type="text" id="dobirth" name="dobirth" placeholder="Your date of birth..">
       </div>
     </div>
     <div class="row">
@@ -269,7 +256,7 @@ table, th, td {
         <label for="address">Address</label>
       </div>
       <div class="col-75">
-        <input type="text" id="address" name="address" placeholder="Your address..">
+        <input type="text" id="address" name="address"  placeholder="Your address..">
       </div>
     </div>
     <div class="row">
@@ -277,7 +264,7 @@ table, th, td {
         <label for="email">Email</label>
       </div>
       <div class="col-75">
-        <input type="text" id="email" name="email" placeholder="Your Email..">
+        <input type="text" id="email" name="email"  placeholder="Your Email..">
       </div>
     </div>
     <div class="row">
@@ -287,8 +274,8 @@ table, th, td {
       <div class="col-75">
         <input type="text" id="phone" name="phone" placeholder="Your phone..">
       </div>
-     </div>
-     <div class="row">
+    </div>
+    <div class="row">
         <div class="col-25">
         	<label for="Search">Search</label>
       	</div>
@@ -296,7 +283,6 @@ table, th, td {
 	        <input type="text" id="search" name="search" placeholder="Your member name to search..">
 	    </div>   
      </div>
- 
     <div class="row">
 	    <div>
 	      <input type="submit" value="Add" onclick="addFunc(); return false;" style="margin-left: 4px;">
@@ -304,6 +290,7 @@ table, th, td {
 	      <input type="submit" value="Delete" onclick="deleteFunc(); return false;" style="margin-left: 4px">
 	    </div>
     </div>
+    
   </form>
 </div>
 
@@ -317,14 +304,12 @@ function myFunction() {
         x.className = "topnav";
     }
 }
-var meminfo = new Array("","","","","", "");
+var meminfo = new Array("","","","","","");
 
 function getMemInfo()
 {
-	if(0 == document.getElementById("fname").value)
+	if(0 == document.getElementById("name").value)
 		alert("enter a value in the first name box");
-	else if(0 == document.getElementById("lname").value)
-		alert("please enter last name of the member");
 	else if(0 == document.getElementById("dobirth").value)
 		alert("please enter date of birth for the member");
 	else if(0 == document.getElementById("address").value)
@@ -342,10 +327,20 @@ function getMemInfo()
 	meminfo[5] = document.getElementById("phone").value;
 }
 
+function updDB()
+{
+	$.post('/members/addMember', 
+			meminfo, 
+			function(response){
+		}, 
+		'json');
+}
+
 function addFunc()
 {
-
-	var table = document.getElementById("myTable");
+//	var mem = new com.example.demo.domain.Member();
+	var myString=new java.lang.String("Test String");
+/* 	var table = document.getElementById("myTable");
 	var rsize = table.rows.length;
 	console.log("number of rows is: " + rsize);
 	var csize = table.rows[0].cells.length;
@@ -362,7 +357,7 @@ function addFunc()
 		cell.innerHTML = meminfo[i];
 	}
 	
-}
+ */}
 
 function modifyFunc()
 {

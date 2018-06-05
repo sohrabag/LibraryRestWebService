@@ -112,18 +112,18 @@ function onKeyUpHandler()
 		console.log("The memberId string is empty");
 	}
 	else
-		{
-			$.getJSON(url, 
-					{ memberId: id }, 
-					function(data) {
-						console.log("Ajax Succeeded to Call Rest Controller");
-						console.log("data received " + data);
-						$("#results").text('');
-						for(var index in data)
-							{
-								$("#results").append('<p>' + data[index].book.title + '</p>');
-							}
-					});
-				console.log(parseInt($('#searchBox').val()));
-		}
+	{
+		$.getJSON(url, 
+				{ memberId: id }, 
+				function(data) {
+					console.log("Ajax Succeeded to Call Rest Controller");
+					console.log("data received " + data);
+					$("#results").text('');
+					for(var index in data)
+						{
+							$("#results").append('<p>' + data[index].book.title + '</p>');
+						}
+				});
+			console.log(parseInt($('#searchBox').val()));
+	}
 }

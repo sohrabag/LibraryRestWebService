@@ -177,6 +177,7 @@ input[type=submit] {
 table, th, td {
     border: 1px solid black;
 }
+
 </style>
 </head>
 
@@ -192,13 +193,13 @@ table, th, td {
     <i class="fa fa-bars"></i>
   </a>
 </div> 
-<div class="container" >
+<div class="container">
 
-	<form action="" style="background-color: #c5bfb7; text-align: left; margin-left: 10px;display: block" id="alerts" onsubmit="fLMEM(); return false;">
-		Alerts For Members:
+	<form action="members.html" style="background-color: #c5bfb7; text-align: left; margin-left: 10px;display: block" id="members">
+		List Of Members:
 		<br />
-		
-	<table id="myTable">
+<div class="myTablediv" style="overflow: hidden; overflow-y: scroll; height: 100px;">
+	<table id="myTable" style="margin-left: 25%; width: 75%; background-color: white;">
 		<tr>
 			<th>Address</th>
 			<th>Date Of Birth</th>
@@ -216,16 +217,24 @@ table, th, td {
 		  <tr>
 		    <td>Row2 cell1</td>
 		    <td>Row2 cell2</td>
+		    <td>Row2 cell3</td>
+		    <td>Row2 cell4</td>
+		    <td>Row2 cell5</td>			    
 		  </tr>
 		  <tr>
 		    <td>Row3 cell1</td>
 		    <td>Row3 cell2</td>
+		    <td>Row3 cell3</td>
+		    <td>Row3 cell4</td>
+		    <td>Row3 cell5</td>			    
 		  </tr>
 		</table>
 		<br />
+
+</div>		
 	</form>
 
-  <form action="action_page.php" style="background-color: #c5bfb7">
+  <form action="" style="background-color: #c5bfb7">
     <div class="row">
       <div class="col-25">
         <label for="fname">First Name</label>
@@ -278,12 +287,22 @@ table, th, td {
       <div class="col-75">
         <input type="text" id="phone" name="phone" placeholder="Your phone..">
       </div>
-    </div>
-    
+     </div>
+     <div class="row">
+        <div class="col-25">
+        	<label for="Search">Search</label>
+      	</div>
+	    <div class="col-75">
+	        <input type="text" id="search" name="search" placeholder="Your member name to search..">
+	    </div>   
+     </div>
+ 
     <div class="row">
-      <input type="submit" value="Add" style="margin-left: 4px">
-      <input type="submit" value="Modify" style="margin-left: 4px">
-      <input type="submit" value="Delete" style="margin-left: 4px">
+	    <div>
+	      <input type="submit" value="Add" onclick="addFunc(); return false;" style="margin-left: 4px;">
+	      <input type="submit" value="Modify" onclick="modifyFunc(); return false;" style="margin-left: 4px">
+	      <input type="submit" value="Delete" onclick="deleteFunc(); return false;" style="margin-left: 4px">
+	    </div>
     </div>
   </form>
 </div>
@@ -297,6 +316,57 @@ function myFunction() {
     } else {
         x.className = "topnav";
     }
+}
+var meminfo = new Array("","","","","", "");
+
+function getMemInfo()
+{
+	if(0 == document.getElementById("fname").value)
+		alert("enter a value in the first name box");
+	else if(0 == document.getElementById("lname").value)
+		alert("please enter last name of the member");
+	else if(0 == document.getElementById("dobirth").value)
+		alert("please enter date of birth for the member");
+	else if(0 == document.getElementById("address").value)
+		alert("please enter address for the member");
+	else if(0 == document.getElementById("email").value)
+		alert("please enter email for the member");
+	else if(0 == document.getElementById("phone").value)
+		alert("please enter phone number for the member");
+	
+	meminfo[0] = document.getElementById("fname").value;
+	meminfo[1] = document.getElementById("lname").value;
+	meminfo[2] = document.getElementById("dobirth").value;
+	meminfo[3] = document.getElementById("address").value;
+	meminfo[4] = document.getElementById("email").value;
+	meminfo[5] = document.getElementById("phone").value;
+}
+
+function addFunc()
+{
+
+	var table = document.getElementById("myTable");
+	var rsize = table.rows.length;
+	console.log("number of rows is: " + rsize);
+	var csize = table.rows[0].cells.length;
+ 	console.log("number of columns is: " + csize);
+	var row = table.insertRow(rsize);
+	var cell;
+
+	//get the memeber info from the form
+	getMemInfo();
+	
+	for(var i=0; i < csize; i++)
+	{
+		cell = row.insertCell(i);
+		cell.innerHTML = meminfo[i];
+	}
+	
+}
+
+function modifyFunc()
+{
+	
 }
 </script>
 

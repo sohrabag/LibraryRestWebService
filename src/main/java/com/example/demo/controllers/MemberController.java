@@ -56,6 +56,7 @@ public class MemberController {
 	@PostMapping("/members/addMember")	//POST
 	public Member addMember(@Valid @RequestBody Member member)
 	{
+		System.out.println("inside post /members/addMember");
 		return mms.create(member);
 	}
 

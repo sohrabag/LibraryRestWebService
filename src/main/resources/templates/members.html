@@ -195,7 +195,7 @@ table, th, td {
   </a>
 </div> 
 <div class="container">
-/* action="#" th:action="@{/members/addMember}" th:object="${member}" method="post" */
+/* action="/members/addMember"  enctype="application/json" method = post */
 	<form  action="" style="background-color: #c5bfb7; text-align: left; margin-left: 10px;display: block" id="members">
 		List Of Members:
 		<br />
@@ -208,33 +208,12 @@ table, th, td {
 					<th>Name</th>
 					<th>Phone</th>
 				</tr>
-				  <tr>
-				    <td>Row1 cell1</td>
-				    <td>Row1 cell2</td>
-				    <td>Row1 cell3</td>
-				    <td>Row1 cell4</td>
-				    <td>Row1 cell5</td>		    		    		    
-				  </tr>
-				  <tr>
-				    <td>Row2 cell1</td>
-				    <td>Row2 cell2</td>
-				    <td>Row2 cell3</td>
-				    <td>Row2 cell4</td>
-				    <td>Row2 cell5</td>			    
-				  </tr>
-				  <tr>
-				    <td>Row3 cell1</td>
-				    <td>Row3 cell2</td>
-				    <td>Row3 cell3</td>
-				    <td>Row3 cell4</td>
-				    <td>Row3 cell5</td>			    
-				  </tr>
 				</table>
 				<br />
 		</div>		
 	</form>
 
-  <form action="" style="background-color: #c5bfb7">
+  <form action=""   id="form_data"  enctype="applicaiton/json"  style="background-color: #c5bfb7">
     <div class="row">
       <div class="col-25">
         <label for="fname">Name</label>
@@ -248,7 +227,7 @@ table, th, td {
         <label for="dob">Date Of Birth</label>
       </div>
       <div class="col-75">
-      	<input type="text" id="dobirth" name="dobirth" placeholder="Your date of birth..">
+      	<input type="text" id="dob" name="dob" placeholder="Your date of birth..">
       </div>
     </div>
     <div class="row">
@@ -276,6 +255,15 @@ table, th, td {
       </div>
     </div>
     <div class="row">
+	    <div>
+	      <input type="submit" value="Add" onclick="addFunc();  return false;" style="margin-left: 4px;">
+	      <input type="submit" value="Modify" onclick="modifyFunc(); return false;" style="margin-left: 4px">
+	      <input type="submit" value="Delete" onclick="deleteFunc(); return false;" style="margin-left: 4px">
+	    </div>
+    </div>
+    
+  </form>
+      <div class="row">
         <div class="col-25">
         	<label for="Search">Search</label>
       	</div>
@@ -283,17 +271,9 @@ table, th, td {
 	        <input type="text" id="search" name="search" placeholder="Your member name to search..">
 	    </div>   
      </div>
-    <div class="row">
-	    <div>
-	      <input type="submit" value="Add" onclick="addFunc(); return false;" style="margin-left: 4px;">
-	      <input type="submit" value="Modify" onclick="modifyFunc(); return false;" style="margin-left: 4px">
-	      <input type="submit" value="Delete" onclick="deleteFunc(); return false;" style="margin-left: 4px">
-	    </div>
-    </div>
-    
-  </form>
 </div>
 
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript">
 /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
 function myFunction() {
@@ -304,65 +284,129 @@ function myFunction() {
         x.className = "topnav";
     }
 }
-var meminfo = new Array("","","","","","");
+var meminfo = new Array("","","","","");
 
 function getMemInfo()
 {
 	if(0 == document.getElementById("name").value)
+	{
 		alert("enter a value in the first name box");
-	else if(0 == document.getElementById("dobirth").value)
+		return false;
+	}
+	else if(0 == document.getElementById("dob").value)
+	{
 		alert("please enter date of birth for the member");
+		return false;
+	}
 	else if(0 == document.getElementById("address").value)
+	{
 		alert("please enter address for the member");
+		return false;
+	}
 	else if(0 == document.getElementById("email").value)
+	{
 		alert("please enter email for the member");
+		return false;
+	}
 	else if(0 == document.getElementById("phone").value)
+	{
 		alert("please enter phone number for the member");
+		return false;
+	}
 	
-	meminfo[0] = document.getElementById("fname").value;
-	meminfo[1] = document.getElementById("lname").value;
-	meminfo[2] = document.getElementById("dobirth").value;
-	meminfo[3] = document.getElementById("address").value;
-	meminfo[4] = document.getElementById("email").value;
-	meminfo[5] = document.getElementById("phone").value;
+	meminfo[0] = document.getElementById("name").value;
+	meminfo[1] = document.getElementById("dob").value;
+	meminfo[2] = document.getElementById("address").value;
+	meminfo[3] = document.getElementById("email").value;
+	meminfo[4] = document.getElementById("phone").value;
 }
 
 function updDB()
 {
-	$.post('/members/addMember', 
+/* 	$.post('/members/addMember', 
 			meminfo, 
 			function(response){
 		}, 
-		'json');
+		'json'); */
+ 	var mem_data = serialTheData();
+		console.log(mem_data);
+		var json_data = JSON.stringify(mem_data);
+		console.log(json_data);
+		return new Promise((resolve, reject) => {
+			$.ajax({
+				type: 'post',
+				url: 'http://localhost:8080/members/addMember/',
+				data: json_data,
+				success: function(data){alert('data' + data);},
+				contentType: "application/json",
+				dataType: 'json'
+				})
+				.done(function(){
+					return resolve(data);
+				})
+				.fail(function(error){
+						console.error(error);
+						return reject(error);
+				})
+				.always(function(){
+							//called after done or failed
+						});
+			});
+ }
+
+/* .serialize() in jQuery to JSON format data of the members form */
+function getFormData($form){
+    var unindexed_array = $form.serializeArray();
+    var indexed_array = {};
+
+    $.map(unindexed_array, function(n, i){
+        indexed_array[n['name']] = n['value'];
+    });
+
+    return indexed_array;
 }
+
+/* .serialize() in jQuery to JSON format data of the members form */
+function serialTheData()
+{
+	var $form =  $("#form_data");
+	var data = getFormData($form);
+	console.log(data);
+	return data;
+}
+
 
 function addFunc()
 {
-//	var mem = new com.example.demo.domain.Member();
-	var myString=new java.lang.String("Test String");
-/* 	var table = document.getElementById("myTable");
+ 	var table = document.getElementById("myTable");
 	var rsize = table.rows.length;
 	console.log("number of rows is: " + rsize);
 	var csize = table.rows[0].cells.length;
  	console.log("number of columns is: " + csize);
+
+	//get the memeber info from the form if all the inputs are filled in the formula
+	var ret = getMemInfo();
+	if(ret == false)
+		return false;
+
 	var row = table.insertRow(rsize);
 	var cell;
-
-	//get the memeber info from the form
-	getMemInfo();
+	
 	
 	for(var i=0; i < csize; i++)
 	{
 		cell = row.insertCell(i);
 		cell.innerHTML = meminfo[i];
 	}
-	
- */}
+	updDB();
+ }
 
 function modifyFunc()
 {
 	
 }
+
+var x = serialTheData();
 </script>
 
 <!-- 	<span class="sp">This is a test for span</span>

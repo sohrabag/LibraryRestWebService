@@ -256,6 +256,7 @@ table, th, td {
     </div>
     <div class="row">
 	    <div>
+	    	<p id="status" style="color: red">Status is default</p>
 	      <input type="submit" value="Add" onclick="addFunc();  return false;" style="margin-left: 4px;">
 	      <input type="submit" value="Modify" onclick="modifyFunc(); return false;" style="margin-left: 4px">
 	      <input type="submit" value="Delete" onclick="deleteFunc(); return false;" style="margin-left: 4px">
@@ -275,6 +276,8 @@ table, th, td {
 
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript">
+
+var bDone = false;
 /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
 function myFunction() {
     var x = document.getElementById("myTopnav");
@@ -323,11 +326,6 @@ function getMemInfo()
 
 function updDB()
 {
-/* 	$.post('/members/addMember', 
-			meminfo, 
-			function(response){
-		}, 
-		'json'); */
  	var mem_data = serialTheData();
 		console.log(mem_data);
 		var json_data = JSON.stringify(mem_data);
@@ -337,19 +335,25 @@ function updDB()
 				type: 'post',
 				url: 'http://localhost:8080/members/addMember/',
 				data: json_data,
-				success: function(data){alert('data' + data);},
+				success: function(data){console.log('data' + data);},
 				contentType: "application/json",
 				dataType: 'json'
 				})
 				.done(function(){
-					return resolve(data);
+ 					bDone = true;
+ 					console.log("inside serialTheData.done bDone is: " + bDone);
+ 					document.getElementById("status").innerHTML="Operation succeeded";
+					return resolve(json_data);
 				})
 				.fail(function(error){
 						console.error(error);
+ 						bDone = false;
+ 						console.log("inside serialTheData.fail bDone is: " + bDone);
 						return reject(error);
 				})
 				.always(function(){
 							//called after done or failed
+							console.log(bDone);
 						});
 			});
  }
@@ -378,30 +382,41 @@ function serialTheData()
 
 function addFunc()
 {
- 	var table = document.getElementById("myTable");
-	var rsize = table.rows.length;
-	console.log("number of rows is: " + rsize);
-	var csize = table.rows[0].cells.length;
- 	console.log("number of columns is: " + csize);
+		updDB();
+		
+		var table = document.getElementById("myTable");
+		var rsize = table.rows.length;
+		console.log("number of rows is: " + rsize);
+		var csize = table.rows[0].cells.length;
+	 	console.log("number of columns is: " + csize);
 
-	//get the memeber info from the form if all the inputs are filled in the formula
-	var ret = getMemInfo();
-	if(ret == false)
-		return false;
+		//get the memeber info from the form if all the inputs are filled in the formula
+		var ret = getMemInfo();
+		if(ret == false)
+			return false;
 
-	var row = table.insertRow(rsize);
-	var cell;
-	
-	
-	for(var i=0; i < csize; i++)
-	{
-		cell = row.insertCell(i);
-		cell.innerHTML = meminfo[i];
-	}
-	updDB();
+/* 		if(bDone == true){ */
+			
+ 			console.log("inside adding a new row to the table.");
+			var row = table.insertRow(rsize);
+			var cell;
+			
+			
+			for(var i=0; i < csize; i++)
+			{
+				cell = row.insertCell(i);
+				cell.innerHTML = meminfo[i];
+			}
+/*  		}
+ */
  }
 
 function modifyFunc()
+{
+	
+}
+
+function deleteFunc()
 {
 	
 }

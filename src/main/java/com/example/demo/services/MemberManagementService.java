@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import com.example.demo.domain.Loan;
 import com.example.demo.domain.Member;
 import com.example.demo.jpa.exception.ResourceNotFoundException;
 import com.example.demo.service.interfaces.IMemberManagementService;
+import com.jayway.jsonpath.internal.function.text.Length;
 
 @Component
 public class MemberManagementService implements IMemberManagementService {
@@ -49,7 +51,14 @@ public class MemberManagementService implements IMemberManagementService {
 
 	@Override
 	public Member create(Member member) {
-		member.setId(memberRep.findAll().toArray().length +1 );
+//		Optional<Member> mem = memberRep.findById(member.getId());
+//		if(mem.get().getName().compareTo(member.getName()) != 0)
+//			return null;
+		int last = memberRep.findAll().toArray().length +1;
+		if(memberRep.findById(last).isPresent())
+			last = last +1;
+		member.setId(last );
+		System.out.println("id is: " + last);
 		return memberRep.save(member);
 		
 	}

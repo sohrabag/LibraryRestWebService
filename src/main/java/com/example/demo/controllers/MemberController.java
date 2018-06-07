@@ -42,7 +42,7 @@ public class MemberController {
 	 * @param memberToUpdate : input parameter of type Member
 	 * @return : returns a Member object
 	 */
-	@PutMapping("/members/{id}")	//PUT
+	@PutMapping("/members/update/{memberId}")	//PUT
 	public Member updateMember(@PathVariable int memberId, @Valid @RequestBody Member memberToUpdate)
 	{
 		return mms.update(memberId, memberToUpdate);
@@ -65,7 +65,7 @@ public class MemberController {
 	 * @param memberId : input parameter of type integer
 	 * @return : returns a ResponseEntity object
 	 */
-	@DeleteMapping("/members/memberId") //DELETE
+	@DeleteMapping("/members/delete/{memberId}") //DELETE
 	public ResponseEntity<?> deleteMember(@PathVariable int memberId)
 	{
 		return mms.delete(memberId);

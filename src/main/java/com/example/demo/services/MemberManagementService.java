@@ -89,11 +89,17 @@ public class MemberManagementService implements IMemberManagementService {
 	 * @param memberId : input parameter type of integer
 	 * @return : returns List of type Loan
 	 */
-	@RequestMapping(value = "/members/laons/all")
+//	@RequestMapping(value = "/members/laons/all")
 	public List<Loan> findLoanByMemberId(int memberId)
 	{
 		
 		return null;
+	}
+	
+//	@RequestMapping(value = "/members/range/{MemberId1}/{MemberId2}")
+	public List<Member> findMembersByIdRange(int MemberId1, int MemberId2)
+	{
+		return memberRep.findMembersByIdBetween(MemberId1, MemberId2);
 	}
 	
 }

@@ -60,8 +60,6 @@ body{
     display: none;
 } 
 
-
-
 /* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
 @media screen and (max-width: 600px) {
   .topnav a:not(:first-child) {display: none;}
@@ -193,9 +191,9 @@ table, th, td {
   <a href="javascript:void(0);" class="icon" onclick="myFunction()">
     <i class="fa fa-bars"></i>
   </a>
-</div> 
+</div>
+ 
 <div class="container">
-/* action="/members/addMember"  enctype="application/json" method = post */
 	<form  action="" style="background-color: #c5bfb7; text-align: left; margin-left: 10px;display: block" id="members">
 		List Of Members:
 		<br />
@@ -207,6 +205,13 @@ table, th, td {
 					<th>Email</th>
 					<th>Name</th>
 					<th>Phone</th>
+				</tr>
+				<tr>
+					<td>cell1</td>
+					<td>cell2</td>
+					<td>cell3</td>
+					<td>cell4</td>
+					<td>cell5</td>
 				</tr>
 				</table>
 				<br />
@@ -256,27 +261,43 @@ table, th, td {
     </div>
     <div class="row">
 	    <div>
-	    	<p id="status" style="color: red">Status is default</p>
+    	    <div class="col-25">
+		    	<p id="status" style="color: red">Status is default</p>
+	    	</div>
 	      <input type="submit" value="Add" onclick="addFunc();  return false;" style="margin-left: 4px;">
 	      <input type="submit" value="Modify" onclick="modifyFunc(); return false;" style="margin-left: 4px">
 	      <input type="submit" value="Delete" onclick="deleteFunc(); return false;" style="margin-left: 4px">
+	      <input type="submit" value="search" onclick="searchFunc()">
 	    </div>
     </div>
-    
   </form>
-      <div class="row">
+ <!--       <div class="row">
         <div class="col-25">
         	<label for="Search">Search</label>
       	</div>
-	    <div class="col-75">
-	        <input type="text" id="search" name="search" placeholder="Your member name to search..">
+	    <div class="col-25">
+	        <input type="text" id="searchBox1" name="searchBox1" placeholder="Your search criteria.." style="margin-left: 10px;">
+	        <input type="text" id="searchBox2" name="searchBox2" placeholder="your search criteria..">
 	    </div>   
-     </div>
+     </div> -->
+     
+     <form action=""    id="search_data"  enctype="applicaiton/json"  style="background-color: #c5bfb7">
+            <div class="row">
+		        <div class="col-25">
+		        	<label for="search">Search Criteria</label>
+		      	</div>
+		    	<div class="col-75">
+			    	<label><input type="text" id="searchBox1" name="searchBox1" placeholder="Enter search criteria.."></label>
+			    	<label><input type="text" id="searchBox2" name="searchBox2" placeholder="Enter search criteria.."></label>
+			    </div>
+		    </div>
+     </form>
+     
 </div>
 
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript">
-
+var meminfo = new Array("","","","","");
 var bDone = false;
 /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
 function myFunction() {
@@ -287,7 +308,6 @@ function myFunction() {
         x.className = "topnav";
     }
 }
-var meminfo = new Array("","","","","");
 
 function getMemInfo()
 {
@@ -379,7 +399,6 @@ function serialTheData()
 	return data;
 }
 
-
 function addFunc()
 {
 		updDB();
@@ -396,8 +415,8 @@ function addFunc()
 			return false;
 
 /* 		if(bDone == true){ */
-			
- 			console.log("inside adding a new row to the table.");
+				
+			console.log("inside adding a new row to the table.");
 			var row = table.insertRow(rsize);
 			var cell;
 			
@@ -410,6 +429,53 @@ function addFunc()
 /*  		}
  */
  }
+
+//searches for the members of a range
+function searchFunc()
+{
+	var $form =  $("#search_data");
+	var data = getFormData($form);
+	console.log(data);
+	var json_data = JSON.stringify(data);
+	console.log(json_data);
+}
+
+function fillMemberTable(first, second)
+{
+ 	var table = document.getElementById("myTable");
+	var rsize = table.rows.length;
+	var csize = table.rows[0].cells.length;
+	console.log("number of rows is: " + rsize);
+	console.log("number of columns is: " + csize);
+
+	var url = "/members/getrange/MemberId1/MemberId2";
+	
+	console.log("inside fillMemberTable");
+	
+	$.ajax(
+			'get',
+				url,
+				{MemberId1: first, MemberId2: second},
+				function(data){
+
+					//table filling starts here
+					var cell;
+					var row = table.insertRow();
+					console.log("filling list of members");
+/* 
+					//iterate through member list and insert it
+					for(var index i data)
+					{
+						for(var i = 0; i < csize; i++)
+						{
+							cell = row.insertCell(i);
+							cell.innerHTML = data[index][i];
+						}
+					}
+*/						
+ 				}	
+			)		
+}
 
 function modifyFunc()
 {

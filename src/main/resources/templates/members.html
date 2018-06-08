@@ -344,6 +344,9 @@ function getMemInfo()
 	meminfo[4] = document.getElementById("phone").value;
 }
 
+/*
+ * function update the database when we add a member
+ */
 function updDB()
 {
  	var mem_data = serialTheData();
@@ -377,6 +380,13 @@ function updDB()
 						});
 			});
  }
+
+/*
+ * The function updates the database when a delete happens
+ */
+function delDB()
+{
+}
 
 /* .serialize() in jQuery to JSON format data of the members form */
 function getFormData($form){

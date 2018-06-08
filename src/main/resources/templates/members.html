@@ -267,7 +267,7 @@ table, th, td {
 	      <input type="submit" value="Add" onclick="addFunc();  return false;" style="margin-left: 4px;">
 	      <input type="submit" value="Modify" onclick="modifyFunc(); return false;" style="margin-left: 4px">
 	      <input type="submit" value="Delete" onclick="deleteFunc(); return false;" style="margin-left: 4px">
-	      <input type="submit" value="search" onclick="searchFunc()">
+	      <input type="submit" value="search" onclick="searchFunc(); return false;">
 	    </div>
     </div>
   </form>
@@ -429,7 +429,6 @@ function addFunc()
 			console.log("inside adding a new row to the table.");
 			var row = table.insertRow(rsize);
 			var cell;
-			
 			
 			for(var i=0; i < csize; i++)
 			{

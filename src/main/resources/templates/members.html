@@ -276,8 +276,8 @@ table, th, td {
         	<label for="Search">Search</label>
       	</div>
 	    <div class="col-25">
-	        <input type="text" id="searchBox1" name="searchBox1" placeholder="Your search criteria.." style="margin-left: 10px;">
-	        <input type="text" id="searchBox2" name="searchBox2" placeholder="your search criteria..">
+	        <input type="text" id="memberId1" name="memberId1" placeholder="Your search criteria.." style="margin-left: 10px;">
+	        <input type="text" id="memberId2" name="memberId2" placeholder="your search criteria..">
 	    </div>   
      </div> -->
      
@@ -287,8 +287,8 @@ table, th, td {
 		        	<label for="search">Search Criteria</label>
 		      	</div>
 		    	<div class="col-75">
-			    	<label><input type="text" id="searchBox1" name="searchBox1" placeholder="Enter search criteria.."></label>
-			    	<label><input type="text" id="searchBox2" name="searchBox2" placeholder="Enter search criteria.."></label>
+			    	<label><input type="text" id="memberId1" name="memberId1" placeholder="Enter search criteria.."></label>
+			    	<label><input type="text" id="memberId2" name="memberId2" placeholder="Enter search criteria.."></label>
 			    </div>
 		    </div>
      </form>
@@ -447,6 +447,22 @@ function searchFunc()
 	console.log(data);
 	var json_data = JSON.stringify(data);
 	console.log(json_data);
+
+	$.ajax({
+		type: 'GET',
+		url: "http://localhost:8080/members/getrange",
+		data: json_data,
+		async: true,
+		  beforeSend: function (xhr) {
+			    if (xhr && xhr.overrideMimeType) {
+			      xhr.overrideMimeType('application/json;charset=utf-8');
+			    }
+			  },
+			  data_type: 'json',
+			  success: function (data) {
+				  console.log("data is: " + data);
+				  }
+		});
 }
 
 function fillMemberTable(first, second)

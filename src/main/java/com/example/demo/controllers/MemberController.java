@@ -71,8 +71,8 @@ public class MemberController {
 		return mms.delete(memberId);
 	}
 	
-	@GetMapping("/members/getrange/{MemberId1}/{MemberId2}")
-	public List<Member> findRangeOfMembersById(@PathVariable("MemberId1") int MemberId1, @PathVariable("MemberId2") int MemberId2)
+	@GetMapping("/members/getrange")
+	public List<Member> findRangeOfMembersById(@PathVariable("memberId1") int MemberId1, @PathVariable("memberId2") int MemberId2)
 	{
 		return mms.findMembersByIdRange( MemberId1, MemberId2);
 	}

@@ -442,27 +442,54 @@ function addFunc()
 //searches for the members of a range
 function searchFunc()
 {
-	var $form =  $("#search_data");
-	var data = getFormData($form);
+/* 	var $form =  $("#search_data"); */
+
+	
+	//build data with JSON format
+	//make sure each input has an attribute name
+	//both enabled and disabled inputs in the form formula is captured
+	//serializeArray only captures enabled inputs in the form formula!! so it is not safe to use that in all cases.
+	var range = new Array(2);
+	var inputs = $("#search_data    :input");
+	var obj = $.map(inputs, function(n, i){
+		var o = {};
+
+		o[n.name] = parseInt($(n).val());
+		range[i] = parseInt($(n).val());
+		return o;
+		});
+/* 
+	var formdata = $("#search_data").serializeArray();
+	console.log(formdata);
+	var data = {};
+	$(formdata).each(function(index, obj){
+		data[obj.name] = obj.value;
+		}); 
 	console.log(data);
 	var json_data = JSON.stringify(data);
 	console.log(json_data);
+*/
 
-	$.ajax({
-		type: 'GET',
-		url: "http://localhost:8080/members/getrange",
-		data: json_data,
-		async: true,
-		  beforeSend: function (xhr) {
-			    if (xhr && xhr.overrideMimeType) {
-			      xhr.overrideMimeType('application/json;charset=utf-8');
-			    }
-			  },
-			  data_type: 'json',
-			  success: function (data) {
-				  console.log("data is: " + data);
-				  }
-		});
+console.log(obj);
+var json_data = JSON.stringify(obj);
+console.log(json_data);
+var url1 = 'http://localhost:8080/members/getRange/' + range[0];
+console.log(url1);
+url1 = url1 + '/' + range[1];
+//set crossDomain: true, option to true to allow cross domain requests such as(SSONP) on the same domain
+$.getJSON( url1,
+		function(data){
+			console.log("data is: " + JSON.stringify(data));
+			}); 
+  $.ajax({
+	type: 'get',
+		url: url1,
+//		contentType: "application/json",
+		dataType: 'json',
+		success: function (data) {
+				console.log("data is: " + JSON.stringify(data));
+			  }
+	}); 
 }
 
 function fillMemberTable(first, second)
@@ -478,11 +505,10 @@ function fillMemberTable(first, second)
 	console.log("inside fillMemberTable");
 	
 	$.ajax(
-			'get',
+			'GET',
 				url,
 				{MemberId1: first, MemberId2: second},
 				function(data){
-
 					//table filling starts here
 					var cell;
 					var row = table.insertRow();

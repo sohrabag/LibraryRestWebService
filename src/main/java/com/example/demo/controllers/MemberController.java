@@ -5,7 +5,6 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,11 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.domain.Member;
-import com.example.demo.domain.SearchData;
 import com.example.demo.services.MemberManagementService;
 
 @RestController
@@ -74,7 +71,7 @@ public class MemberController {
 		return mms.delete(memberId);
 	}
 	
-	@GetMapping(value="/members/getRange/{memberId1}/{memberId2}") //    
+	@GetMapping(value="/members/getRange/{memberId1}/{memberId2}")    
 	public List<Member> findRangeOfMembersById(@PathVariable int memberId1, 
 															@PathVariable int memberId2)
 	{

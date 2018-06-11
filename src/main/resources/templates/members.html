@@ -299,6 +299,10 @@ table, th, td {
 <script type="text/javascript">
 var meminfo = new Array("","","","","");
 var bDone = false;
+
+var jsond;
+var col_names;
+
 /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
 function myFunction() {
     var x = document.getElementById("myTopnav");
@@ -439,6 +443,48 @@ function addFunc()
  */
  }
 
+
+function fillTable(table)
+{
+	var url1 = 'http://localhost:8080/members/getRange/1/1';
+
+	//set crossDomain: true, option to true to allow cross domain requests such as(SSONP) on the same domain
+	$.getJSON( url1,
+			function(data){
+				console.log("data is: " + JSON.stringify(data));
+				console.log("data is: " + JSON.stringify(data));
+				jsond = JSON.stringify(data);
+				console.log("data jsond is: " + jsond);
+				console.log(jsond.length);
+
+				if(jsond.length > 0)
+				{
+					var cols = JSON.parse(jsond);
+					var names = cols[0];
+					col_names = Object.getOwnPropertyNames(names);
+				}				
+		});
+		
+	console.log(col_names.length);
+	/* find the index for the last row */
+ 	var rows = table.rows.length;
+ 	/* insert the new row after the last row */
+ 	var row = table.insertRow(rows);
+	var cell;
+ 	var csize = col_names.length;
+
+	for(var i=0; i < csize; i++)
+	{
+		cell = row.insertCell(i);
+	}
+	//create the header of the table
+	for(var key in col_names)
+	{
+		cell.innerHTML = col_names[key];
+	}
+	
+}
+
 //searches for the members of a range
 function searchFunc()
 {
@@ -471,25 +517,40 @@ function searchFunc()
 */
 
 console.log(obj);
+
 var json_data = JSON.stringify(obj);
 console.log(json_data);
 var url1 = 'http://localhost:8080/members/getRange/' + range[0];
 console.log(url1);
 url1 = url1 + '/' + range[1];
+
 //set crossDomain: true, option to true to allow cross domain requests such as(SSONP) on the same domain
 $.getJSON( url1,
 		function(data){
 			console.log("data is: " + JSON.stringify(data));
-			}); 
+			});
+			 
   $.ajax({
 	type: 'get',
 		url: url1,
 //		contentType: "application/json",
 		dataType: 'json',
 		success: function (data) {
+				
 				console.log("data is: " + JSON.stringify(data));
-			  }
-	}); 
+				jsond = JSON.stringify(data);
+				console.log("data jsond is: " + jsond);
+				console.log(jsond.length);
+
+				if(jsond.length > 0)
+				{
+					var cols = JSON.parse(jsond);
+					var names = cols[0];
+					col_names = Object.getOwnPropertyNames(names);
+				}
+		 }
+	});
+
 }
 
 function fillMemberTable(first, second)
@@ -530,7 +591,12 @@ function fillMemberTable(first, second)
 
 function modifyFunc()
 {
-	
+/* 	console.log(col_names);	
+	for(var key in col_names)
+	{
+		console.log(col_names[key]);
+	} */
+	fillTable();
 }
 
 function deleteFunc()

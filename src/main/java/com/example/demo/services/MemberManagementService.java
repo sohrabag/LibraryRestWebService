@@ -96,7 +96,6 @@ public class MemberManagementService implements IMemberManagementService {
 		return null;
 	}
 	
-//	@RequestMapping(value = "/members/range/{MemberId1}/{MemberId2}")
 	public List<Member> findMembersByIdRange(int MemberId1, int MemberId2)
 	{
 		return memberRep.findMembersByIdBetween(MemberId1, MemberId2);

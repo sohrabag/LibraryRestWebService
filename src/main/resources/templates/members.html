@@ -199,7 +199,7 @@ table, th, td {
 		<br />
 		<div class="myTablediv" style="overflow: hidden; overflow-y: scroll; height: 100px;">
 			<table id="myTable" style="margin-left: 25%; width: 75%; background-color: white;">
-				<tr>
+<!-- 				<tr>
 					<th>Address</th>
 					<th>Date Of Birth</th>
 					<th>Email</th>
@@ -213,7 +213,7 @@ table, th, td {
 					<td>cell4</td>
 					<td>cell5</td>
 				</tr>
-				</table>
+ -->				</table>
 				<br />
 		</div>		
 	</form>
@@ -302,7 +302,16 @@ var bDone = false;
 
 var jsond;
 var col_names;
+var table1;
 
+/* when document is loaded the table headers must be initialized */
+/* window.onload = function(){
+	fillTableHeader();
+} */
+
+$(document).ready(function(){
+	fillTableHeader();
+});
 /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
 function myFunction() {
     var x = document.getElementById("myTopnav");
@@ -444,8 +453,9 @@ function addFunc()
  }
 
 
-function fillTable(table)
+function fillTableHeader()
 {
+	table1 = document.getElementById("myTable");
 	var url1 = 'http://localhost:8080/members/getRange/1/1';
 
 	//set crossDomain: true, option to true to allow cross domain requests such as(SSONP) on the same domain
@@ -462,27 +472,24 @@ function fillTable(table)
 					var cols = JSON.parse(jsond);
 					var names = cols[0];
 					col_names = Object.getOwnPropertyNames(names);
-				}				
-		});
-		
-	console.log(col_names.length);
-	/* find the index for the last row */
- 	var rows = table.rows.length;
- 	/* insert the new row after the last row */
- 	var row = table.insertRow(rows);
-	var cell;
- 	var csize = col_names.length;
+				}
 
-	for(var i=0; i < csize; i++)
-	{
-		cell = row.insertCell(i);
-	}
-	//create the header of the table
-	for(var key in col_names)
-	{
-		cell.innerHTML = col_names[key];
-	}
-	
+				console.log(col_names.length);
+				/* find the index for the last row */
+			 	var rows = table1.rows.length;
+			 	/* insert the new row after the last row */
+			 	var row = table1.insertRow(rows);
+				var cell;
+			 	var csize = col_names.length;
+
+				for(var i=0; i < csize; i++)
+				{
+					cell = row.insertCell(i);
+					cell.innerHTML = col_names[i];
+				}
+											
+		});
+
 }
 
 //searches for the members of a range
@@ -496,7 +503,7 @@ function searchFunc()
 	//both enabled and disabled inputs in the form formula is captured
 	//serializeArray only captures enabled inputs in the form formula!! so it is not safe to use that in all cases.
 	var range = new Array(2);
-	var inputs = $("#search_data    :input");
+	var inputs = $("#search_data    : input");
 	var obj = $.map(inputs, function(n, i){
 		var o = {};
 
@@ -549,44 +556,43 @@ $.getJSON( url1,
 					col_names = Object.getOwnPropertyNames(names);
 				}
 		 }
-	});
+	})				
+	.done(function(){
+				console.log(".done is called..")
+		})
+		.fail(function(error){
+				console.error(error);
+		})
+		.always(function(){
+					//called after done or failed
+					console.log(".always is called..")
 
+				});
+
+	/* fill the result of the search in the table */
+  fillMemberTable();
 }
 
-function fillMemberTable(first, second)
+function fillMemberTable()
 {
+	console.log("from inside fillMemberTable()..");
  	var table = document.getElementById("myTable");
 	var rsize = table.rows.length;
 	var csize = table.rows[0].cells.length;
 	console.log("number of rows is: " + rsize);
 	console.log("number of columns is: " + csize);
-
-	var url = "/members/getrange/MemberId1/MemberId2";
-	
-	console.log("inside fillMemberTable");
-	
-	$.ajax(
-			'GET',
-				url,
-				{MemberId1: first, MemberId2: second},
-				function(data){
-					//table filling starts here
-					var cell;
-					var row = table.insertRow();
-					console.log("filling list of members");
-/* 
-					//iterate through member list and insert it
-					for(var index i data)
-					{
-						for(var i = 0; i < csize; i++)
-						{
-							cell = row.insertCell(i);
-							cell.innerHTML = data[index][i];
-						}
-					}
-*/						
- 				}	
-			)		
+	console.log(jsond);
+ 
+/* 	//iterate through member list and insert it
+	for(var index i jsond)
+	{
+		for(var i = 0; i < csize; i++)
+		{
+			cell = row.insertCell(i);
+			cell.innerHTML = jsond[index][i];
+		}
+	} */
+						
 }
 
 function modifyFunc()
@@ -595,8 +601,9 @@ function modifyFunc()
 	for(var key in col_names)
 	{
 		console.log(col_names[key]);
-	} */
-	fillTable();
+	} 
+*/
+	fillTableHeader();
 }
 
 function deleteFunc()

@@ -1,20 +1,19 @@
+//super global variables in jQuery
+var meminfo = new Array("","","","","");
+var bDone = false;
+var inputs;
+var jsond;
+var col_names;
+var table1;
+var global_data;
+
+
 $(document).ready(function() {
 
-	var meminfo = new Array("","","","","");
-	var bDone = false;
-	
-	var jsond;
-	var col_names;
-	var table1;
-	
-	/* when document is loaded the table headers must be initialized */
-	/* window.onload = function(){
-		fillTableHeader();
-	} */
-	
-	$(document).ready(function(){
-		fillTableHeader();
-	});
+	fillTableHeader();
+//	$(document).ready(function(){
+//
+//	});
 });
 	/* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
 	function myFunction() {
@@ -24,41 +23,6 @@ $(document).ready(function() {
 	    } else {
 	        x.className = "topnav";
 	    }
-	}
-	
-	function getMemInfo()
-	{
-		if(0 == document.getElementById("name").value)
-		{
-			alert("enter a value in the first name box");
-			return false;
-		}
-		else if(0 == document.getElementById("dob").value)
-		{
-			alert("please enter date of birth for the member");
-			return false;
-		}
-		else if(0 == document.getElementById("address").value)
-		{
-			alert("please enter address for the member");
-			return false;
-		}
-		else if(0 == document.getElementById("email").value)
-		{
-			alert("please enter email for the member");
-			return false;
-		}
-		else if(0 == document.getElementById("phone").value)
-		{
-			alert("please enter phone number for the member");
-			return false;
-		}
-		
-		meminfo[0] = document.getElementById("name").value;
-		meminfo[1] = document.getElementById("dob").value;
-		meminfo[2] = document.getElementById("address").value;
-		meminfo[3] = document.getElementById("email").value;
-		meminfo[4] = document.getElementById("phone").value;
 	}
 	
 	/*
@@ -128,34 +92,68 @@ $(document).ready(function() {
 	
 	function addFunc()
 	{
-			updDB();
-			
-			var table = document.getElementById("myTable");
-			var rsize = table.rows.length;
-			console.log("number of rows is: " + rsize);
-			var csize = table.rows[0].cells.length;
-		 	console.log("number of columns is: " + csize);
+		var table = document.getElementById("myTable");
+		var rsize = table.rows.length;
+		console.log("number of rows is: " + rsize);
+		var csize = table.rows[0].cells.length;
+	 	console.log("number of columns is: " + csize);
+
+		//get the memeber info from the form if all the inputs are filled in the formula
+		var ret = getMemInfo();
+		if(ret == false)
+			return false;
 	
-			//get the memeber info from the form if all the inputs are filled in the formula
-			var ret = getMemInfo();
-			if(ret == false)
-				return false;
-	
-	/* 		if(bDone == true){ */
-					
-				console.log("inside adding a new row to the table.");
-				var row = table.insertRow(rsize);
-				var cell;
+/* 		if(bDone == true){ */
 				
-				for(var i=0; i < csize; i++)
-				{
-					cell = row.insertCell(i);
-					cell.innerHTML = meminfo[i];
-				}
+			console.log("inside adding a new row to the table.");
+			var row = table.insertRow(rsize);
+			var cell;
+			
+			for(var i=0; i < csize; i++)
+			{
+				cell = row.insertCell(i);
+				cell.innerHTML = meminfo[i];
+			}
+			
+			updDB();
 	/*  		}
 	 */
 	 }
 	
+	function getMemInfo()
+	{
+		if(0 == document.getElementById("name").value)
+		{
+			alert("enter a value in the first name box");
+			return false;
+		}
+		else if(0 == document.getElementById("dob").value)
+		{
+			alert("please enter date of birth for the member");
+			return false;
+		}
+		else if(0 == document.getElementById("address").value)
+		{
+			alert("please enter address for the member");
+			return false;
+		}
+		else if(0 == document.getElementById("email").value)
+		{
+			alert("please enter email for the member");
+			return false;
+		}
+		else if(0 == document.getElementById("phone").value)
+		{
+			alert("please enter phone number for the member");
+			return false;
+		}
+		
+		meminfo[0] = document.getElementById("name").value;
+		meminfo[1] = document.getElementById("dob").value;
+		meminfo[2] = document.getElementById("address").value;
+		meminfo[3] = document.getElementById("email").value;
+		meminfo[4] = document.getElementById("phone").value;
+	}
 	
 	function fillTableHeader()
 	{
@@ -207,14 +205,23 @@ $(document).ready(function() {
 		//both enabled and disabled inputs in the form formula is captured
 		//serializeArray only captures enabled inputs in the form formula!! so it is not safe to use that in all cases.
 		var range = new Array(2);
-		var inputs = $("#search_data    : input");
-		var obj = $.map(inputs, function(n, i){
-			var o = {};
-	
-			o[n.name] = parseInt($(n).val());
-			range[i] = parseInt($(n).val());
-			return o;
-			});
+//		inputs = $("#search_data    : input");
+//		var obj = $.map(inputs, function(n, i){
+//			var o = {};
+//	
+//			o[n.name] = parseInt($(n).val());
+//			range[i] = parseInt($(n).val());
+//			return o;
+//			});
+//		console.log(obj);
+//		var json_data = JSON.stringify(obj);
+//		console.log(json_data);		
+		var inputs = document.getElementById("search_data");
+		for(var i = 0; i < inputs.length; i++)
+		{
+			range[i] = inputs.elements[i].value;
+			console.log(range[i]);
+		}
 	/* 
 		var formdata = $("#search_data").serializeArray();
 		console.log(formdata);
@@ -226,11 +233,6 @@ $(document).ready(function() {
 		var json_data = JSON.stringify(data);
 		console.log(json_data);
 	*/
-	
-	console.log(obj);
-	
-	var json_data = JSON.stringify(obj);
-	console.log(json_data);
 	var url1 = 'http://localhost:8080/members/getRange/' + range[0];
 	console.log(url1);
 	url1 = url1 + '/' + range[1];
@@ -252,13 +254,16 @@ $(document).ready(function() {
 					jsond = JSON.stringify(data);
 					console.log("data jsond is: " + jsond);
 					console.log(jsond.length);
-	
+					global_data = data;
 					if(jsond.length > 0)
 					{
 						var cols = JSON.parse(jsond);
 						var names = cols[0];
 						col_names = Object.getOwnPropertyNames(names);
 					}
+					
+					/* fill the result of the search in the table */
+				  fillMemberTable();
 			 }
 		})				
 		.done(function(){
@@ -272,13 +277,12 @@ $(document).ready(function() {
 						console.log(".always is called..")
 	
 					});
-	
-		/* fill the result of the search in the table */
-	  fillMemberTable();
+
 	}
 	
 	function fillMemberTable()
 	{
+		table1 = document.getElementById("myTable");
 		console.log("from inside fillMemberTable()..");
 	 	var table = document.getElementById("myTable");
 		var rsize = table.rows.length;
@@ -286,17 +290,29 @@ $(document).ready(function() {
 		console.log("number of rows is: " + rsize);
 		console.log("number of columns is: " + csize);
 		console.log(jsond);
-	 
-	/* 	//iterate through member list and insert it
-		for(var index i jsond)
+	 	/* insert the new row after the last row */
+	 	var row = table1.insertRow(rsize);
+	 	var index;
+	 	var k;
+	 	var cal_values;
+	 	//iterate through member list and insert it
+		var cols = JSON.parse(jsond);
+//		if(jsond.length > 0)
+//		{
+//			var cols = JSON.parse(jsond);
+//			var names = cols[0];
+//			col_values = Object.values(names);
+//		}
+		for(var i=0; i < cols.length; i++)
 		{
-			for(var i = 0; i < csize; i++)
+			var names = cols[i];
+			col_values = Object.values(names);
+			for(k = 0; k < csize; k++)
 			{
-				cell = row.insertCell(i);
-				cell.innerHTML = jsond[index][i];
+				cell = row.insertCell(k);
+				cell.innerHTML = col_values[k];
 			}
-		} */
-							
+		}
 	}
 	
 	function modifyFunc()
@@ -315,6 +331,6 @@ $(document).ready(function() {
 		
 	}
 	
-	var x = serialTheData();
+//	var x = serialTheData();
 	
 

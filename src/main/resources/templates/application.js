@@ -290,8 +290,19 @@ $(document).ready(function() {
 		console.log("number of rows is: " + rsize);
 		console.log("number of columns is: " + csize);
 		console.log(jsond);
+		
+		//firstly remove all the rows except the header row
+		for(var i=rsize-1; i >0; i--)
+		{
+			table1.deleteRow(i);
+		}
+		var rsize = table.rows.length;
+		var row;
 	 	/* insert the new row after the last row */
-	 	var row = table1.insertRow(rsize);
+		if(rsize > 1)
+			row = table1.insertRow(rsize-1);
+		else
+			row = table1.insertRow(rsize);
 	 	var index;
 	 	var k;
 	 	var cal_values;
@@ -303,6 +314,7 @@ $(document).ready(function() {
 //			var names = cols[0];
 //			col_values = Object.values(names);
 //		}
+
 		for(var i=0; i < cols.length; i++)
 		{
 			var names = cols[i];
@@ -312,6 +324,8 @@ $(document).ready(function() {
 				cell = row.insertCell(k);
 				cell.innerHTML = col_values[k];
 			}
+			rsize = table1.rows.length;
+			row = table1.insertRow(rsize);
 		}
 	}
 	

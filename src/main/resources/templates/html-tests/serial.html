@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>serializeArray demo</title>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+ 
+<form class="login"  id="form_data">
+    <label for="_user_name">username:</label>
+    <input type="text" id="_user_name" name="user[name]" value="dev.pus" />
+    <label for="_user_pass">password:</label>
+    <input type="password" id="_user_pass" name="user[pass]" value="1234" />
+    <button type="submit">login</button>
+</form>
+ 
+<script>
+function getFormData($form){
+    var unindexed_array = $form.serializeArray();
+    var indexed_array = {};
+
+    $.map(unindexed_array, function(n, i){
+        indexed_array[n['name']] = n['value'];
+    });
+
+    return indexed_array;
+}
+var $form = $("#form_data");
+var data = getFormData($form);
+console.log(data);
+/* var formData = $("form.login").serializeArray();
+console.log(formData); */
+
+</script>
+ 
+</body>
+</html>

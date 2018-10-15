@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style type="text/css">
+.sp {
+color: blue;
+display:block;
+width: 100%; 
+
+}
+
+.bt1{
+width: 100px;
+height: 20px;
+}
+div>form {
+color: black;
+background-color: white; 
+}
+
+body{
+	margin: 0;
+	font-family: Arial, Helvetica, sans-serif;
+}
+/* Add a black background color to the top navigation */
+.topnav {
+    background-color: #333;
+    overflow: hidden;
+    background-image: url("http://media1.myfolio.com/users/CostasSteiros/images/thumbs/h7on1a2y2r_poster.gif");
+	background-size: 10%;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Add an active class to highlight the current page */
+.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Hide the link that should open and close the topnav on small screens */
+.topnav .icon {
+    display: none;
+} 
+
+/* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
+@media screen and (max-width: 600px) {
+  .topnav a:not(:first-child) {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+/* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
+@media screen and (max-width: 600px) {
+  .topnav.responsive {position: relative;}
+  .topnav.responsive a.icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}
+
+input[type=text] {
+	padding: 10px 20px;
+	margin: 8px 0;
+	box-sizing: border-box;
+}
+label {
+	padding: 8px 8px;
+}
+
+textarea {
+	background-color: white;
+/* 	margin-left: 100px; */
+	color: black;
+	width: 20%;
+}
+
+.Aut{
+background-color: white;
+margin-left: 100px;
+color: white;
+}
+
+.bt
+{
+margin-left: 100px;
+background-color: white;
+}
+/* Style inputs, select elements and textareas */
+input[type=text], select, textarea{
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+/* Style the label to display next to the inputs */
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+/* Style the submit button */
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+/* Style the container */
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+/* Floating column for labels: 25% width */
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+/* Floating column for inputs: 75% width */
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+table, th, td {
+    border: 1px solid black;
+}
+
+</style>
+</head>
+
+<body>
+<div class="topnav" id="myTopnav">
+<!--   <a href="#home" class="active">Home</a> -->
+<a href="home.html" class="active">Home</a>
+  <a href="members.html">Members</a>
+  <a href="books.html">Books</a>
+  <a href="loans.html">Loans</a>
+  <a>""</a>
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+    <i class="fa fa-bars"></i>
+  </a>
+</div>
+ 
+<div class="container">
+	<form  action="" style="background-color: #c5bfb7; text-align: left; margin-left: 10px;display: block" id="members">
+		List Of Members:
+		<br />
+		<div class="myTablediv" style="overflow: hidden; overflow-y: scroll; height: 100px;">
+			<table id="myTable" style="margin-left: 25%; width: 75%; background-color: white;">
+<!-- 				<tr>
+					<th>Address</th>
+					<th>Date Of Birth</th>
+					<th>Email</th>
+					<th>Name</th>
+					<th>Phone</th>
+				</tr>
+				<tr>
+					<td>cell1</td>
+					<td>cell2</td>
+					<td>cell3</td>
+					<td>cell4</td>
+					<td>cell5</td>
+				</tr>
+ -->				</table>
+				<br />
+		</div>		
+	</form>
+
+  <form action=""   id="form_data"  enctype="applicaiton/json"  style="background-color: #c5bfb7">
+    <div class="row">
+      <div class="col-25">
+        <label for="fname">Name</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="name" name="name" placeholder="Your name..">
+      </div>
+    </div>
+   <div class="row">
+      <div class="col-25">
+        <label for="dob">Date Of Birth</label>
+      </div>
+      <div class="col-75">
+      	<input type="text" id="dob" name="dob" placeholder="Your date of birth..">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="address">Address</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="address" name="address"  placeholder="Your address..">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="email">Email</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="email" name="email"  placeholder="Your Email..">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="phone">Phone</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="phone" name="phone" placeholder="Your phone..">
+      </div>
+    </div>
+    <div class="row">
+	    <div>
+    	    <div class="col-25">
+		    	<p id="status" style="color: red">Status is default</p>
+	    	</div>
+	      <input type="submit" value="Add" onclick="addFunc();  return false;" style="margin-left: 4px;">
+	      <input type="submit" value="Modify" onclick="modifyFunc(); return false;" style="margin-left: 4px">
+	      <input type="submit" value="Delete" onclick="deleteFunc(); return false;" style="margin-left: 4px">
+	      <input type="submit" value="search" onclick="searchFunc(); return false;">
+	    </div>
+    </div>
+  </form>
+ <!--       <div class="row">
+        <div class="col-25">
+        	<label for="Search">Search</label>
+      	</div>
+	    <div class="col-25">
+	        <input type="text" id="memberId1" name="memberId1" placeholder="Your search criteria.." style="margin-left: 10px;">
+	        <input type="text" id="memberId2" name="memberId2" placeholder="your search criteria..">
+	    </div>   
+     </div> -->
+     
+     <form action=""    id="search_data"  enctype="applicaiton/json"  style="background-color: #c5bfb7">
+            <div class="row">
+		        <div class="col-25">
+		        	<label for="search">Search Criteria</label>
+		      	</div>
+		    	<div class="col-75">
+			    	<label><input type="text" id="memberId1" name="memberId1" placeholder="Enter search criteria.."></label>
+			    	<label><input type="text" id="memberId2" name="memberId2" placeholder="Enter search criteria.."></label>
+			    </div>
+		    </div>
+     </form>
+     
+</div>
+
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+var meminfo = new Array("","","","","");
+var bDone = false;
+
+var jsond;
+var col_names;
+var table1;
+
+/* when document is loaded the table headers must be initialized */
+/* window.onload = function(){
+	fillTableHeader();
+} */
+
+$(document).ready(function(){
+	fillTableHeader();
+});
+/* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+    }
+}
+
+function getMemInfo()
+{
+	if(0 == document.getElementById("name").value)
+	{
+		alert("enter a value in the first name box");
+		return false;
+	}
+	else if(0 == document.getElementById("dob").value)
+	{
+		alert("please enter date of birth for the member");
+		return false;
+	}
+	else if(0 == document.getElementById("address").value)
+	{
+		alert("please enter address for the member");
+		return false;
+	}
+	else if(0 == document.getElementById("email").value)
+	{
+		alert("please enter email for the member");
+		return false;
+	}
+	else if(0 == document.getElementById("phone").value)
+	{
+		alert("please enter phone number for the member");
+		return false;
+	}
+	
+	meminfo[0] = document.getElementById("name").value;
+	meminfo[1] = document.getElementById("dob").value;
+	meminfo[2] = document.getElementById("address").value;
+	meminfo[3] = document.getElementById("email").value;
+	meminfo[4] = document.getElementById("phone").value;
+}
+
+/*
+ * function update the database when we add a member
+ */
+function updDB()
+{
+ 	var mem_data = serialTheData();
+		console.log(mem_data);
+		var json_data = JSON.stringify(mem_data);
+		console.log(json_data);
+		return new Promise((resolve, reject) => {
+			$.ajax({
+				type: 'post',
+				url: 'http://localhost:8080/members/addMember/',
+				data: json_data,
+				success: function(data){console.log('data' + data);},
+				contentType: "application/json",
+				dataType: 'json'
+				})
+				.done(function(){
+ 					bDone = true;
+ 					console.log("inside serialTheData.done bDone is: " + bDone);
+ 					document.getElementById("status").innerHTML="Operation succeeded";
+					return resolve(json_data);
+				})
+				.fail(function(error){
+						console.error(error);
+ 						bDone = false;
+ 						console.log("inside serialTheData.fail bDone is: " + bDone);
+						return reject(error);
+				})
+				.always(function(){
+							//called after done or failed
+							console.log(bDone);
+						});
+			});
+ }
+
+/*
+ * The function updates the database when a delete happens
+ */
+function delDB()
+{
+}
+
+/* .serialize() in jQuery to JSON format data of the members form */
+function getFormData($form){
+    var unindexed_array = $form.serializeArray();
+    var indexed_array = {};
+
+    $.map(unindexed_array, function(n, i){
+        indexed_array[n['name']] = n['value'];
+    });
+
+    return indexed_array;
+}
+
+/* .serialize() in jQuery to JSON format data of the members form */
+function serialTheData()
+{
+	var $form =  $("#form_data");
+	var data = getFormData($form);
+	console.log(data);
+	return data;
+}
+
+function addFunc()
+{
+ 		updDB();
+		
+		var table = document.getElementById("myTable");
+		var rsize = table.rows.length;
+		console.log("number of rows is: " + rsize);
+		var csize = table.rows[0].cells.length;
+	 	console.log("number of columns is: " + csize);
+
+		//get the memeber info from the form if all the inputs are filled in the formula
+		var ret = getMemInfo();
+		if(ret == false)
+			return false;
+
+/* 		if(bDone == true){ */
+				
+			console.log("inside adding a new row to the table.");
+			var row = table.insertRow(rsize);
+			var cell;
+			
+			for(var i=0; i < csize; i++)
+			{
+				cell = row.insertCell(i);
+				cell.innerHTML = meminfo[i];
+			}
+
+/*  		}
+ */
+ }
+
+
+function fillTableHeader()
+{
+	table1 = document.getElementById("myTable");
+	var url1 = 'http://localhost:8080/members/getRange/1/1';
+
+	//set crossDomain: true, option to true to allow cross domain requests such as(SSONP) on the same domain
+	$.getJSON( url1,
+			function(data){
+				console.log("data is: " + JSON.stringify(data));
+				console.log("data is: " + JSON.stringify(data));
+				jsond = JSON.stringify(data);
+				console.log("data jsond is: " + jsond);
+				console.log(jsond.length);
+
+				if(jsond.length > 0)
+				{
+					var cols = JSON.parse(jsond);
+					var names = cols[0];
+					col_names = Object.getOwnPropertyNames(names);
+				}
+
+				console.log(col_names.length);
+				/* find the index for the last row */
+			 	var rows = table1.rows.length;
+			 	/* insert the new row after the last row */
+			 	var row = table1.insertRow(rows);
+				var cell;
+			 	var csize = col_names.length;
+
+				for(var i=0; i < csize; i++)
+				{
+					cell = row.insertCell(i);
+					cell.innerHTML = col_names[i];
+				}
+											
+		});
+
+}
+
+//searches for the members of a range
+function searchFunc()
+{
+/* 	var $form =  $("#search_data"); */
+
+	
+	//build data with JSON format
+	//make sure each input has an attribute name
+	//both enabled and disabled inputs in the form formula is captured
+	//serializeArray only captures enabled inputs in the form formula!! so it is not safe to use that in all cases.
+	var range = new Array(2);
+	var inputs = $("#search_data    : input");
+	var obj = $.map(inputs, function(n, i){
+		var o = {};
+
+		o[n.name] = parseInt($(n).val());
+		range[i] = parseInt($(n).val());
+		return o;
+		});
+/* 
+	var formdata = $("#search_data").serializeArray();
+	console.log(formdata);
+	var data = {};
+	$(formdata).each(function(index, obj){
+		data[obj.name] = obj.value;
+		}); 
+	console.log(data);
+	var json_data = JSON.stringify(data);
+	console.log(json_data);
+*/
+
+console.log(obj);
+
+var json_data = JSON.stringify(obj);
+console.log(json_data);
+var url1 = 'http://localhost:8080/members/getRange/' + range[0];
+console.log(url1);
+url1 = url1 + '/' + range[1];
+
+//set crossDomain: true, option to true to allow cross domain requests such as(SSONP) on the same domain
+$.getJSON( url1,
+		function(data){
+			console.log("data is: " + JSON.stringify(data));
+			});
+			 
+  $.ajax({
+	type: 'get',
+		url: url1,
+//		contentType: "application/json",
+		dataType: 'json',
+		success: function (data) {
+				
+				console.log("data is: " + JSON.stringify(data));
+				jsond = JSON.stringify(data);
+				console.log("data jsond is: " + jsond);
+				console.log(jsond.length);
+
+				if(jsond.length > 0)
+				{
+					var cols = JSON.parse(jsond);
+					var names = cols[0];
+					col_names = Object.getOwnPropertyNames(names);
+				}
+		 }
+	})				
+	.done(function(){
+				console.log(".done is called..")
+		})
+		.fail(function(error){
+				console.error(error);
+		})
+		.always(function(){
+					//called after done or failed
+					console.log(".always is called..")
+
+				});
+
+	/* fill the result of the search in the table */
+  fillMemberTable();
+}
+
+function fillMemberTable()
+{
+	console.log("from inside fillMemberTable()..");
+ 	var table = document.getElementById("myTable");
+	var rsize = table.rows.length;
+	var csize = table.rows[0].cells.length;
+	console.log("number of rows is: " + rsize);
+	console.log("number of columns is: " + csize);
+	console.log(jsond);
+ 
+/* 	//iterate through member list and insert it
+	for(var index i jsond)
+	{
+		for(var i = 0; i < csize; i++)
+		{
+			cell = row.insertCell(i);
+			cell.innerHTML = jsond[index][i];
+		}
+	} */
+						
+}
+
+function modifyFunc()
+{
+/* 	console.log(col_names);	
+	for(var key in col_names)
+	{
+		console.log(col_names[key]);
+	} 
+*/
+	fillTableHeader();
+}
+
+function deleteFunc()
+{
+	
+}
+
+var x = serialTheData();
+</script>
+
+<!-- 	<span class="sp">This is a test for span</span>
+	<br />
+	
+	<div>
+		<form action="" id="foname" onclick="validate">
+			<p id="pdemo">This is p test</p>
+			Color: <input type="color" name="clr">
+			<br/>
+			Date: <input type="datetime-local" name="dname">
+			<br />
+			<input class="bt1" type="button" id="b1" value="Ok">	
+		</form>
+	</div>
+	
+	<br />
+	
+	<script type="text/javascript">
+
+	function youclickme()
+	{
+		alert("hejsan");
+	}
+	
+	function validate()
+	{
+		console("hejsan");
+		var el = document.getElementById("b1");
+		el.onclick = youclickme;
+	}
+	
+	</script>
+ -->
+ </body>
+</html>

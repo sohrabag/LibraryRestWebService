@@ -1,0 +1,8 @@
+ECMANScript version 5
+it is a full-fledged langugage
+ecmanscript 2015(version 6), very much is about inheritence and object oriendted programming. sugar coding 
+node.js is a server som sitter in chrom.
+
+client side javascript so man can do 
+
+<script type="text/javascript src="myfile.js"></script>

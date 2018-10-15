@@ -1,0 +1,8 @@
+com.example.demo
+com.example.demo.controllers
+com.example.demo.dataaccess
+com.example.demo.domain
+com.example.demo.domain.interfaces
+com.example.demo.jpa.exception
+com.example.demo.service.interfaces
+com.example.demo.services

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" type="text/css" href="members.css" >
+
+</head>
+
+<body>
+<div class="topnav" id="myTopnav">
+<!--   <a href="#home" class="active">Home</a> -->
+<a href="home.html" class="active">Home</a>
+  <a href="members.html">Members</a>
+  <a href="books.html">Books</a>
+  <a href="loans.html">Loans</a>
+  <a>""</a>
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+    <i class="fa fa-bars"></i>
+  </a>
+</div>
+ 
+<div class="container">
+	<form  action="" style="background-color: #c5bfb7; text-align: left; margin-left: 10px;display: block" id="members">
+		List Of Members:
+		<br />
+		<div class="myTablediv" style="overflow: hidden; overflow-y: scroll; height: 100px;">
+			<table id="myTable" style="margin-left: 25%; width: 75%; background-color: white;">
+			</table>
+				<br />
+		</div>		
+	</form>
+
+  <form action=""   id="form_data"  enctype="applicaiton/json"  style="background-color: #c5bfb7">
+    <div class="row">
+      <div class="col-25">
+        <label for="fname">Name</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="name" name="name" placeholder="Your name..">
+      </div>
+    </div>
+   <div class="row">
+      <div class="col-25">
+        <label for="dob">Date Of Birth</label>
+      </div>
+      <div class="col-75">
+      	<input type="text" id="dob" name="dob" placeholder="Your date of birth..">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="address">Address</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="address" name="address"  placeholder="Your address..">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="email">Email</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="email" name="email"  placeholder="Your Email..">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="phone">Phone</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="phone" name="phone" placeholder="Your phone..">
+      </div>
+    </div>
+    <div class="row">
+	    <div>
+    	    <div class="col-25">
+		    	<p id="status" style="color: red">Status is default</p>
+	    	</div>
+	      <input type="submit" value="Add" onclick="addFunc();  return false;" style="margin-left: 4px;">
+	      <input type="submit" value="Modify" onclick="modifyFunc(); return false;" style="margin-left: 4px">
+	      <input type="submit" value="Delete" onclick="deleteFunc(); return false;" style="margin-left: 4px">
+	      <input type="submit" value="search" onclick="searchFunc(); return false;">
+	    </div>
+    </div>
+  </form>
+ <!--       <div class="row">
+        <div class="col-25">
+        	<label for="Search">Search</label>
+      	</div>
+	    <div class="col-25">
+	        <input type="text" id="memberId1" name="memberId1" placeholder="Your search criteria.." style="margin-left: 10px;">
+	        <input type="text" id="memberId2" name="memberId2" placeholder="your search criteria..">
+	    </div>   
+     </div> -->
+     
+     <form action=""    id="search_data"  enctype="applicaiton/json"  style="background-color: #c5bfb7">
+            <div class="row">
+		        <div class="col-25">
+		        	<label for="search">Search Criteria</label>
+		      	</div>
+		    	<div class="col-75">
+			    	<label><input type="text" id="memberId1" name="memberId1" placeholder="Enter search criteria.."></label>
+			    	<label><input type="text" id="memberId2" name="memberId2" placeholder="Enter search criteria.."></label>
+			    </div>
+		    </div>
+     </form>
+     
+</div>
+
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="application.js"></script>
+
+ </body>
+</html>
